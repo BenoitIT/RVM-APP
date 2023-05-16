@@ -6,8 +6,13 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import * as yup from "yup";
 import { Formik } from "formik";
 import CustomButton from "../buttons/Button";
+const LoginSchema = yup.object({
+  phoneNumber: yup.number().required().min(10),
+  password: yup.string().required(),
+});
 const Login = () => {
   return (
     <View>
@@ -30,6 +35,7 @@ const Login = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Formik
           initialValues={{ phoneNumber: "", password: "" }}
+          validationSchema={LoginSchema}
           onSubmit={(values, action) => {
             action.resetForm();
           }}
@@ -38,18 +44,24 @@ const Login = () => {
             <View>
               <TextInput
                 keyboardType="numeric"
-                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-full p-2 mb-[10%] placeholder:text-center"
+                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-full p-2 mt-[3%] placeholder:text-center"
                 placeholder="Your phone number here"
                 onChange={props.handleChange("phoneNumber")}
-                values={props.values.phoneNumber}
+                onBlur={props.handleBlur("phoneNumber")}
               />
+              <Text className="text-red-400 text-xs text-center  mt-2">
+                {props.touched.phoneNumber && props.errors.phoneNumber}
+              </Text>
               <TextInput
-                className="bg-gray-200 border border-gray-200 text-black  text-sm rounded-sm focus:border-lime-600 block w-full p-2 mb-[10%] placeholder:text-center"
+                className="bg-gray-200 border border-gray-200 text-black  text-sm rounded-sm focus:border-lime-600 block w-full p-2 mt-[3%] placeholder:text-center"
                 placeholder="Your password here"
                 onChange={props.handleChange("password")}
                 values={props.values.password}
-                secureTextEntry={true}
+                onBlur={props.handleBlur("password")}
               />
+              <Text className="text-red-400 text-xs text-center  mt-2">
+                {props.touched.password && props.errors.password}
+              </Text>
               <CustomButton
                 title="Login"
                 text="font-bold text-sm capitalize text-white text-center"
