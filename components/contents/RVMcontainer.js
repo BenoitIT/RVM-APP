@@ -8,6 +8,7 @@ const RVMcontainer = () => {
         height: 350,
         backgroundColor: "#e5e7eb",
         borderRadius: 500,
+        marginLeft:20,
       }}
     >
       <Image
