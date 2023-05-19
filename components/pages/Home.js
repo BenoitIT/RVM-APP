@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from "react-native";
 import RVMcontainer from "../contents/RVMcontainer";
 import CustomButton from "../buttons/Button";
-export const Home = () => {
+export const Home = ({ navigation }) => {
   return (
     <View>
       <View className="text-center mb-[10%]">
@@ -18,6 +18,7 @@ export const Home = () => {
           title="Login"
           text="font-bold text-sm capitalize text-white text-center"
           bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4"
+          onPress={() => navigation.navigate('login')}
         />
         <CustomButton
           title="continue with google"

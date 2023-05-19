@@ -13,7 +13,7 @@ const LoginSchema = yup.object({
   phoneNumber: yup.number().required().min(10),
   password: yup.string().required(),
 });
-const Login = () => {
+const Login = ({navigation}) => {
   return (
     <View>
       <Text
@@ -29,7 +29,7 @@ const Login = () => {
       >
         _RVM_
       </Text>
-      <Text className="text-lime-600 font-semibold text-xl mb-[50%]">
+      <Text className="text-lime-600 font-semibold text-xl mb-[25%] ml-[13vw]">
         Login with Email and Password
       </Text>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -44,7 +44,7 @@ const Login = () => {
             <View>
               <TextInput
                 keyboardType="numeric"
-                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-full p-2 mt-[3%] placeholder:text-center"
+                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                 placeholder="Your phone number here"
                 onChange={props.handleChange("phoneNumber")}
                 onBlur={props.handleBlur("phoneNumber")}
@@ -53,7 +53,7 @@ const Login = () => {
                 {props.touched.phoneNumber && props.errors.phoneNumber}
               </Text>
               <TextInput
-                className="bg-gray-200 border border-gray-200 text-black  text-sm rounded-sm focus:border-lime-600 block w-full p-2 mt-[3%] placeholder:text-center"
+                className="bg-gray-200 border border-gray-200 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                 placeholder="Your password here"
                 onChange={props.handleChange("password")}
                 values={props.values.password}
@@ -65,13 +65,14 @@ const Login = () => {
               <CustomButton
                 title="Login"
                 text="font-bold text-sm capitalize text-white text-center"
-                bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4"
+                bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
                 onPress={props.handleSubmit}
               />
               <CustomButton
                 title="create an account"
                 text="font-bold text-sm capitalize text-black text-center"
-                bgView="flex justify-center bg-gray-300 focus:ring-1 border-b-2 shadow-sm border-gray-400 dark:shadow-sm rounded-md py-2"
+                bgView="flex justify-center bg-gray-300 focus:ring-1 border-b-2 shadow-sm border-gray-400 dark:shadow-sm rounded-md py-2 mx-[10vw]"
+                onPress={() => navigation.navigate('register')}
               />
             </View>
           )}

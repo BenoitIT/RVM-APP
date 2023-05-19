@@ -34,7 +34,7 @@ const SignUp = () => {
       >
         _RVM_
       </Text>
-      <Text className="text-lime-600 font-semibold text-xl mb-[20%]">
+      <Text className="text-lime-600 font-semibold text-xl mb-[10%] ml-[10vw]">
         Fill Identifications Below To Register
       </Text>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -55,7 +55,7 @@ const SignUp = () => {
           {(props) => (
             <View>
               <TextInput
-                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-full p-2 mt-[3%] placeholder:text-center"
+                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                 placeholder="Enter your First name"
                 onChange={props.handleChange("firstName")}
                 values={props.values.firstName}
@@ -65,7 +65,7 @@ const SignUp = () => {
                 {props.touched.firstName && props.errors.firstName}
               </Text>
               <TextInput
-                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-full p-2 mt-[3%] placeholder:text-center"
+                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                 placeholder="Enter your Last name"
                 onChange={props.handleChange("lastname")}
                 values={props.values.lastname}
@@ -76,7 +76,7 @@ const SignUp = () => {
               </Text>
               <TextInput
                 keyboardType="numeric"
-                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-full p-2 mt-[3%] placeholder:text-center"
+                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                 placeholder="Enter phone number "
                 onChange={props.handleChange("phoneNumber")}
                 values={props.values.phoneNumber}
@@ -86,7 +86,7 @@ const SignUp = () => {
                 {props.touched.phoneNumber && props.errors.phoneNumber}
               </Text>
               <TextInput
-                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-full p-2 mt-[3%] placeholder:text-center"
+                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                 placeholder="Enter your Nationality"
                 onChange={props.handleChange("Nationality")}
                 values={props.values.Nationality}
@@ -96,7 +96,7 @@ const SignUp = () => {
                 {props.touched.Nationality && props.errors.Nationality}
               </Text>
               <TextInput
-                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-full p-2 mt-[3%] placeholder:text-center"
+                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                 placeholder="Enter your email"
                 onChange={props.handleChange("email")}
                 values={props.values.email}
@@ -106,7 +106,7 @@ const SignUp = () => {
                 {props.touched.email && props.errors.email}
               </Text>
               <TextInput
-                className="bg-gray-200 border border-gray-200 text-black  text-sm rounded-sm focus:border-lime-600 block w-full p-2 mt-[3%] placeholder:text-center"
+                className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                 placeholder="create a password"
                 onChange={props.handleChange("password")}
                 values={props.values.password}
@@ -118,7 +118,7 @@ const SignUp = () => {
               <CustomButton
                 title="Register"
                 text="font-bold text-sm capitalize text-white text-center"
-                bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-[3%]"
+                bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
                 onPress={props.handleSubmit}
                 onBlur={props.handleBlur("password")}
               />
