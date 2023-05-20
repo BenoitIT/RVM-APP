@@ -5,7 +5,10 @@ import {
   Text,
   TouchableWithoutFeedback,
   Keyboard,
+  SafeAreaView
 } from "react-native";
+import { Platform, NativeModules } from 'react-native';
+const { StatusBarManager } = NativeModules;
 import * as yup from "yup";
 import { Formik } from "formik";
 import CustomButton from "../buttons/Button";
@@ -15,7 +18,12 @@ const LoginSchema = yup.object({
 });
 const Login = ({navigation}) => {
   return (
-    <View>
+    <SafeAreaView  style={{ 
+      flex: 1, 
+      paddingTop: Platform.OS === 'android' ? StatusBarManager.HEIGHT : 0,
+     }} >
+     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <View className="mt-[10vh]">
       <Text
         style={{
           fontSize: 30,
@@ -32,7 +40,6 @@ const Login = ({navigation}) => {
       <Text className="text-lime-600 font-semibold text-xl mb-[25%] ml-[13vw]">
         Login with Email and Password
       </Text>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Formik
           initialValues={{ phoneNumber: "", password: "" }}
           validationSchema={LoginSchema}
@@ -77,8 +84,9 @@ const Login = ({navigation}) => {
             </View>
           )}
         </Formik>
-      </TouchableWithoutFeedback>
     </View>
+      </TouchableWithoutFeedback>
+    </SafeAreaView>
   );
 };
 export default Login;
