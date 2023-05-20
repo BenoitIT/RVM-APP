@@ -1,10 +1,16 @@
 import React from 'react';
-import { View, Text } from "react-native";
+import { Platform, NativeModules } from 'react-native';
+const { StatusBarManager } = NativeModules;
+import { View, Text ,SafeAreaView} from "react-native";
 import RVMcontainer from "../contents/RVMcontainer";
 import CustomButton from "../buttons/Button";
 export const Home = ({ navigation }) => {
   return (
-    <View>
+    <SafeAreaView  style={{ 
+      flex: 1, 
+      paddingTop: Platform.OS === 'android' ? StatusBarManager.HEIGHT : 0,
+     }}>
+    <View className="mt-[5vh]">
       <View className="text-center mb-[10%]">
         <Text  style={{ fontSize: 30,fontWeight: 'bold', textAlign: 'center', textShadowColor: 'rgba(0, 0, 0, 0.2)', textShadowOffset: { width: 1, height: 1.5 }, textShadowRadius: 2,opacity:50 }}>Welcome To</Text>
         <Text style={{ fontSize: 28, fontWeight: 'bold', textAlign: 'center', textShadowColor: 'rgba(0, 0, 0, 0.5)', textShadowOffset: { width: 1, height: 1.5}, textShadowRadius: 2 }}>
@@ -27,6 +33,7 @@ export const Home = ({ navigation }) => {
         />
       </View>
     </View>
+    </SafeAreaView>
   );
 };
 export default Home;
