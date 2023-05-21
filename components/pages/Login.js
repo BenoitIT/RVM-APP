@@ -73,7 +73,7 @@ const Login = ({navigation}) => {
                 title="Login"
                 text="font-bold text-sm capitalize text-white text-center"
                 bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
-                onPress={props.handleSubmit}
+                onPress={() => navigation.navigate('recycle')}
               />
               <CustomButton
                 title="create an account"

@@ -2,13 +2,14 @@ import React from "react";
 import { SafeAreaView, View, Text, ScrollView } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { Platform, NativeModules } from "react-native";
+import { useDispatch } from "react-redux";
 import CustomButton from "../buttons/Button";
 import AppHeader from "../contents/AppHeader";
 const { StatusBarManager } = NativeModules;
 
 const Locations = () => {
   const [selected, setSelected] = React.useState("");
-
+   const dispatch= useDispatch()
   const data = [
     { key: "1", value: "Mobiles", disabled: true },
     { key: "2", value: "Appliances" },
@@ -61,6 +62,7 @@ const Locations = () => {
               title="Next"
               text="font-bold text-sm capitalize text-white text-center"
               bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
+              onPress={() => dispatch(2)}
             />
           </View>
         </View>
