@@ -3,7 +3,7 @@ import React from "react";
 import SignUp from "../pages/signUp";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
-import Recycle from "../pages/CanType";
+import Recycle from "../pages/Recycle";
 
 const NavStack = () => {
   const Stack = createNativeStackNavigator();
