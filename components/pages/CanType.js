@@ -6,6 +6,7 @@ import CustomButton from "../buttons/Button";
 import AppHeader from "../contents/AppHeader";
 import { setCurrentPage } from "../../redux/multisSteps/multiStepFormSlice";
 import { useDispatch } from "react-redux";
+import toaster from "../contents/Toaster";
 const { StatusBarManager } = NativeModules;
 
 const CanType = () => {
@@ -16,7 +17,10 @@ const CanType = () => {
     { key: "1", value: "plastic bottle" },
     { key: "2", value: "can" },
   ];
-
+  const handleGoToNextPage = () => {
+    if (!selected) return toaster("select the type of bottle", "orange");
+    dispatch(setCurrentPage(1));
+  };
   return (
     <SafeAreaView
       style={{
@@ -46,7 +50,7 @@ const CanType = () => {
           </View>
           <View className="py-20">
             <CustomButton
-              onPress={()=>dispatch(setCurrentPage(1))}
+              onPress={handleGoToNextPage}
               title="Next"
               text="font-bold text-sm capitalize text-white text-center"
               bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   TextInput,
   Text,
+  ActivityIndicator,
   TouchableWithoutFeedback,
   Keyboard,
   SafeAreaView,
@@ -12,7 +13,7 @@ import { Formik } from "formik";
 import { Platform, NativeModules } from "react-native";
 import CustomButton from "../buttons/Button";
 import { userRegister } from "../../api_manger/user_Api";
-import Toast from 'react-native-root-toast';
+import toaster from "../contents/Toaster";
 
 const { StatusBarManager } = NativeModules;
 const SignupSchema = yup.object({
@@ -20,19 +21,24 @@ const SignupSchema = yup.object({
   lastname: yup.string().required(),
   Nationality: yup.string().required(),
   phoneNumber: yup
-  .string()
-  .required()
-  .test('is-valid-phone-number', 'Phone number be 10 digits started with 0', (value) => {
-    if (value) {
-      const digitsOnly = value.replace(/\D/g, ''); 
-      return digitsOnly.length === 10; 
-    }
-    return false;
-  }),
+    .string()
+    .required()
+    .test(
+      "is-valid-phone-number",
+      "Phone number be 10 digits started with 0",
+      (value) => {
+        if (value) {
+          const digitsOnly = value.replace(/\D/g, "");
+          return digitsOnly.length === 10;
+        }
+        return false;
+      }
+    ),
   password: yup.string().required(),
   email: yup.string(),
 });
-const SignUp = ({navigation}) => {
+const SignUp = ({ navigation }) => {
+  const [loader, setLoader] = useState(false);
   return (
     <SafeAreaView
       style={{
@@ -59,6 +65,7 @@ const SignUp = ({navigation}) => {
           <Text className="text-lime-600 font-semibold text-xl mb-[10%] ml-[10vw]">
             Fill Identifications Below To Register
           </Text>
+          {loader && <ActivityIndicator size="large" color="#00ff00" />}
           <Formik
             initialValues={{
               firstName: "",
@@ -70,29 +77,24 @@ const SignUp = ({navigation}) => {
             }}
             validationSchema={SignupSchema}
             onSubmit={(values, action) => {
+              setLoader(true);
               userRegister({
-                firstName:values.firstName,
-                lastname:values.lastname,
-                Nationality:values.Nationality,
+                firstName: values.firstName,
+                lastname: values.lastname,
+                Nationality: values.Nationality,
                 phoneNumber: values.phoneNumber,
                 password: values.password,
-                email: values.email
-              }).then(result=>{
-                console.log(result);
-                if(result.data.status=="success"){
-                  navigation.replace('login');
-                  Toast.show('your account created successfully', {
-                    duration: Toast.durations.SHORT,
-                    position: Toast.positions.BOTTOM,
-                    shadow: true,
-                    animation: true,
-                    hideOnPress: true,
-                    backgroundColor:'green',
-                    textColor:'white',
-                    delay: 0,
-                });
+                email: values.email,
+              }).then((result) => {
+                if (result?.status == "failed") {
+                  toaster(result?.message, "orange");
                 }
-              })
+                if (result.data?.status == "success") {
+                  navigation.replace("login");
+                  toaster("your account created successfully", "green");
+                }
+                setLoader(false);
+              });
               action.resetForm();
             }}
           >
