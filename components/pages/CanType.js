@@ -4,9 +4,12 @@ import { SelectList } from "react-native-dropdown-select-list";
 import { Platform, NativeModules } from "react-native";
 import CustomButton from "../buttons/Button";
 import AppHeader from "../contents/AppHeader";
+import { setCurrentPage } from "../../redux/multisSteps/multiStepFormSlice";
+import { useDispatch } from "react-redux";
 const { StatusBarManager } = NativeModules;
 
 const CanType = () => {
+  const dispatch = useDispatch();
   const [selected, setSelected] = React.useState("");
 
   const data = [
@@ -43,6 +46,7 @@ const CanType = () => {
           </View>
           <View className="py-20">
             <CustomButton
+              onPress={()=>dispatch(setCurrentPage(1))}
               title="Next"
               text="font-bold text-sm capitalize text-white text-center"
               bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"

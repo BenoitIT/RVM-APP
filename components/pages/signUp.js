@@ -10,17 +10,29 @@ import {
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Platform, NativeModules } from "react-native";
-const { StatusBarManager } = NativeModules;
 import CustomButton from "../buttons/Button";
+import { userRegister } from "../../api_manger/user_Api";
+import Toast from 'react-native-root-toast';
+
+const { StatusBarManager } = NativeModules;
 const SignupSchema = yup.object({
   firstName: yup.string().required(),
   lastname: yup.string().required(),
   Nationality: yup.string().required(),
-  phoneNumber: yup.number().required().min(10),
+  phoneNumber: yup
+  .string()
+  .required()
+  .test('is-valid-phone-number', 'Phone number be 10 digits started with 0', (value) => {
+    if (value) {
+      const digitsOnly = value.replace(/\D/g, ''); 
+      return digitsOnly.length === 10; 
+    }
+    return false;
+  }),
   password: yup.string().required(),
-  email: yup.string().required(),
+  email: yup.string(),
 });
-const SignUp = () => {
+const SignUp = ({navigation}) => {
   return (
     <SafeAreaView
       style={{
@@ -58,6 +70,29 @@ const SignUp = () => {
             }}
             validationSchema={SignupSchema}
             onSubmit={(values, action) => {
+              userRegister({
+                firstName:values.firstName,
+                lastname:values.lastname,
+                Nationality:values.Nationality,
+                phoneNumber: values.phoneNumber,
+                password: values.password,
+                email: values.email
+              }).then(result=>{
+                console.log(result);
+                if(result.data.status=="success"){
+                  navigation.replace('login');
+                  Toast.show('your account created successfully', {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    backgroundColor:'green',
+                    textColor:'white',
+                    delay: 0,
+                });
+                }
+              })
               action.resetForm();
             }}
           >
@@ -66,7 +101,7 @@ const SignUp = () => {
                 <TextInput
                   className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                   placeholder="Enter your First name"
-                  onChange={props.handleChange("firstName")}
+                  onChangeText={props.handleChange("firstName")}
                   values={props.values.firstName}
                   onBlur={props.handleBlur("firstName")}
                 />
@@ -76,7 +111,7 @@ const SignUp = () => {
                 <TextInput
                   className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                   placeholder="Enter your Last name"
-                  onChange={props.handleChange("lastname")}
+                  onChangeText={props.handleChange("lastname")}
                   values={props.values.lastname}
                   onBlur={props.handleBlur("lastname")}
                 />
@@ -87,7 +122,7 @@ const SignUp = () => {
                   keyboardType="numeric"
                   className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                   placeholder="Enter phone number "
-                  onChange={props.handleChange("phoneNumber")}
+                  onChangeText={props.handleChange("phoneNumber")}
                   values={props.values.phoneNumber}
                   onBlur={props.handleBlur("phoneNumber")}
                 />
@@ -97,7 +132,7 @@ const SignUp = () => {
                 <TextInput
                   className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                   placeholder="Enter your Nationality"
-                  onChange={props.handleChange("Nationality")}
+                  onChangeText={props.handleChange("Nationality")}
                   values={props.values.Nationality}
                   onBlur={props.handleBlur("Nationality")}
                 />
@@ -107,7 +142,7 @@ const SignUp = () => {
                 <TextInput
                   className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                   placeholder="Enter your email"
-                  onChange={props.handleChange("email")}
+                  onChangeText={props.handleChange("email")}
                   values={props.values.email}
                   onBlur={props.handleBlur("email")}
                 />
@@ -117,7 +152,7 @@ const SignUp = () => {
                 <TextInput
                   className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
                   placeholder="create a password"
-                  onChange={props.handleChange("password")}
+                  onChangeText={props.handleChange("password")}
                   values={props.values.password}
                   secureTextEntry={true}
                 />

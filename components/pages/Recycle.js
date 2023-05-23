@@ -1,17 +1,25 @@
-import React from 'react'
+import React from 'react';
 import Locations from './locations';
 import CanType from './CanType';
-import { View } from 'react-native/types';
+import { View } from 'react-native';
 import { useSelector } from 'react-redux';
-import { showPage } from '../../redux/MultisSteps/multiStepFormSlice';
- const Recycle = () => {
-    const currentPage = useSelector(showPage);
+import { showPage } from '../../redux/multisSteps/multiStepFormSlice';
+
+const Recycle = () => {
+  const currentPage = useSelector(showPage);
+  if(currentPage===1) {
+  return (
+     <Locations /> 
+  );
+  }
+  else if(currentPage===2){
     return (
-     <View>
-        {
-            currentPage == 1 ? <Locations/>: currentPage == 2 ? <CanType/>:null
-        }
-    </View>
-    )
-}
+        <CanType  /> 
+     );
+  }else{
+    return null;
+  }
+};
+
 export default Recycle;
+
