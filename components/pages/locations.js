@@ -1,25 +1,67 @@
-import React from "react";
-import { SafeAreaView, View, Text, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  ActivityIndicator,
+  ScrollView,
+} from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { Platform, NativeModules } from "react-native";
 import { useDispatch } from "react-redux";
 import CustomButton from "../buttons/Button";
 import AppHeader from "../contents/AppHeader";
-const { StatusBarManager } = NativeModules;
+import { getRVMzones, getRVMLocation } from "../../api_manger/location_Api";
 import { setCurrentPage } from "../../redux/multisSteps/multiStepFormSlice";
-const Locations = () => {
-  const [selected, setSelected] = React.useState("");
-   const dispatch= useDispatch()
-  const data = [
-    { key: "1", value: "Mobiles", disabled: true },
-    { key: "2", value: "Appliances" },
-    { key: "3", value: "Cameras" },
-    { key: "4", value: "Computers", disabled: true },
-    { key: "5", value: "Vegetables" },
-    { key: "6", value: "Diary Products" },
-    { key: "7", value: "Drinks" },
-  ];
+import toaster from "../contents/Toaster";
 
+const { StatusBarManager } = NativeModules;
+const Locations = () => {
+  const [selected, setSelected] = useState("");
+  const [selectedZone, setSelectedZone] = useState("");
+  const [data, setData] = useState("");
+  const [zoneData, setZoneData] = useState("");
+  const [loader, setLoader] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getRVMLocation().then((result) => {
+      setLoader(true);
+      const res = result.data.data;
+      const locations = res.map((obj, index) => {
+        const { Location, ...rest } = obj;
+        return {
+          ...rest,
+          key: index + 1,
+          value: Location,
+        };
+      });
+      setData(locations);
+      setSelectedZone("");
+      setLoader(false);
+    });
+  }, []);
+  const handleSelectLocation = (val) => {
+    setLoader(true);
+    getRVMzones(val).then((result) => {
+      const zones = result.data.data;
+      const zoneArray = zones.map((obj, index) => {
+        const { zone, ...rest } = obj;
+        return {
+          ...rest,
+          key: index + 1,
+          value: zone,
+        };
+      });
+      setZoneData(zoneArray);
+    });
+    setSelected(val);
+    setLoader(false);
+  };
+  const handleGoToNextPage = () => {
+    if (!selected) return toaster("select location", "orange");
+    if (!selectedZone) return toaster("select zone RVM is located", "orange");
+    dispatch(setCurrentPage(2));
+  };
   return (
     <SafeAreaView
       style={{
@@ -39,10 +81,11 @@ const Locations = () => {
           <Text className="text-lime-600 font-medium text-2xl mb-[5%] text-center">
             select the nearest RVM by your location
           </Text>
+          {loader && <ActivityIndicator size="small" color="#00ff00" />}
           <View className=" px-[10vw]">
             <Text className="text-gray-600 text-lg my-2">Location</Text>
             <SelectList
-              setSelected={(val) => setSelected(val)}
+              setSelected={handleSelectLocation}
               data={data}
               save="value"
               placeholder="select location"
@@ -51,8 +94,8 @@ const Locations = () => {
           <View className=" px-[10vw]">
             <Text className="text-gray-600 text-lg my-2">Zone</Text>
             <SelectList
-              setSelected={(val) => setSelected(val)}
-              data={data}
+              setSelected={(val) => setSelectedZone(val)}
+              data={zoneData}
               save="value"
               placeholder="select zone"
             />
@@ -62,7 +105,7 @@ const Locations = () => {
               title="Next"
               text="font-bold text-sm capitalize text-white text-center"
               bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
-              onPress={() => dispatch(setCurrentPage(2))}
+              onPress={handleGoToNextPage}
             />
           </View>
         </View>
