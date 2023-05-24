@@ -1,24 +1,46 @@
-import React from "react";
-import { SafeAreaView, View, Text, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { Platform, NativeModules } from "react-native";
 import CustomButton from "../buttons/Button";
 import AppHeader from "../contents/AppHeader";
 import { setCurrentPage } from "../../redux/multisSteps/multiStepFormSlice";
+import { getAllowedBottles } from "../../api_manger/Bottle_Api";
 import { useDispatch } from "react-redux";
 import toaster from "../contents/Toaster";
+import { saveBottleType } from "../../redux/multisSteps/RecyclablesData";
 const { StatusBarManager } = NativeModules;
 
 const CanType = () => {
   const dispatch = useDispatch();
-  const [selected, setSelected] = React.useState("");
-
-  const data = [
-    { key: "1", value: "plastic bottle" },
-    { key: "2", value: "can" },
-  ];
+  const [selected, setSelected] = useState("");
+  const [data, setData] = useState("");
+  const [loader, setLoader] = useState(false);
+  useEffect(() => {
+    getAllowedBottles().then((result) => {
+      setLoader(true);
+      const res = result.data.data;
+      const bottleTypes = res.map((obj) => {
+        const { id, bottleType, ...rest } = obj;
+        return {
+          ...rest,
+          key: id,
+          value: bottleType,
+        };
+      });
+      setData(bottleTypes);
+      setLoader(false);
+    });
+  }, []);
   const handleGoToNextPage = () => {
     if (!selected) return toaster("select the type of bottle", "orange");
+    dispatch(saveBottleType(selected))
     dispatch(setCurrentPage(3));
   };
   return (
@@ -41,6 +63,7 @@ const CanType = () => {
             <Text className="text-gray-600 text-lg my-2">
               select the type of recyclable
             </Text>
+            {loader && <ActivityIndicator size="small" color="#00ff00" />}
             <SelectList
               setSelected={(val) => setSelected(val)}
               data={data}

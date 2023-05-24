@@ -14,6 +14,10 @@ import AppHeader from "../contents/AppHeader";
 import { getRVMzones, getRVMLocation } from "../../api_manger/location_Api";
 import { setCurrentPage } from "../../redux/multisSteps/multiStepFormSlice";
 import toaster from "../contents/Toaster";
+import {
+  saveLocation,
+  saveZone,
+} from "../../redux/multisSteps/RecyclablesData";
 
 const { StatusBarManager } = NativeModules;
 const Locations = () => {
@@ -42,6 +46,7 @@ const Locations = () => {
   }, []);
   const handleSelectLocation = (val) => {
     setLoader(true);
+    dispatch(saveLocation(val));
     getRVMzones(val).then((result) => {
       const zones = result.data.data;
       const zoneArray = zones.map((obj, index) => {
@@ -56,6 +61,10 @@ const Locations = () => {
     });
     setSelected(val);
     setLoader(false);
+  };
+  const handleSelectZone = (val) => {
+    dispatch(saveZone(val));
+    setSelectedZone(val);
   };
   const handleGoToNextPage = () => {
     if (!selected) return toaster("select location", "orange");
@@ -94,7 +103,7 @@ const Locations = () => {
           <View className=" px-[10vw]">
             <Text className="text-gray-600 text-lg my-2">Zone</Text>
             <SelectList
-              setSelected={(val) => setSelectedZone(val)}
+              setSelected={handleSelectZone}
               data={zoneData}
               save="value"
               placeholder="select zone"

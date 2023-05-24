@@ -80,7 +80,7 @@ const SignUp = ({ navigation }) => {
               setLoader(true);
               userRegister({
                 firstName: values.firstName,
-                lastname: values.lastname,
+                lastName: values.lastname,
                 Nationality: values.Nationality,
                 phoneNumber: values.phoneNumber,
                 password: values.password,

@@ -70,17 +70,17 @@ const Login = ({ navigation }) => {
               userLogin({
                 phoneNumber: values.phoneNumber,
                 password: values.password,
-              }).then((result) => {
+              }).then(async(result) => {
                 if (result?.status == "failed") {
                   toaster(result?.message, "orange");
                 }
                 if (result.data?.status == "success") {
-                  AsyncStorage.setItem("accessToken", result.data.data);
+                  await AsyncStorage.setItem("accessToken", result.data.data);
                   navigation.replace("recycle");
                   toaster("login success! welcome", "green");
                 }
                 setLoader(false);
-              });
+              }).catch(errors =>console.log(errors));
               action.resetForm();
             }}
           >
