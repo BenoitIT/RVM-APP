@@ -23,7 +23,7 @@ import {
 } from "../../redux/multisSteps/RecyclablesData";
 const { StatusBarManager } = NativeModules;
 
-const QrScanner = () => {
+const QrScanner = ({navigation}) => {
   const dispatch = useDispatch();
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -91,6 +91,7 @@ const QrScanner = () => {
         toaster(result?.data?.message, "green");
       }
       setLoader(false);
+      navigation.navigate("stats");
       dispatch(setCurrentPage(1));
     });
   };

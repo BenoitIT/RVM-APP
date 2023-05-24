@@ -28,8 +28,8 @@ const Locations = () => {
   const [loader, setLoader] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
+    setLoader(true);
     getRVMLocation().then((result) => {
-      setLoader(true);
       const res = result.data.data;
       const locations = res.map((obj, index) => {
         const { Location, ...rest } = obj;

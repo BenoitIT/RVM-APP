@@ -9,7 +9,6 @@ import {
   SafeAreaView,
 } from "react-native";
 import { Platform, NativeModules } from "react-native";
-const { StatusBarManager } = NativeModules;
 import * as yup from "yup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Formik } from "formik";
@@ -17,6 +16,7 @@ import CustomButton from "../buttons/Button";
 import { userLogin } from "../../api_manger/user_Api";
 import toaster from "../contents/Toaster";
 
+const { StatusBarManager } = NativeModules;
 const LoginSchema = yup.object({
   phoneNumber: yup
     .string()
