@@ -1,9 +1,9 @@
 import React from 'react';
 import Locations from './locations';
 import CanType from './CanType';
-import { View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { showPage } from '../../redux/multisSteps/multiStepFormSlice';
+import QrScanner from './QrScanner';
 
 const Recycle = () => {
   const currentPage = useSelector(showPage);
@@ -17,7 +17,9 @@ const Recycle = () => {
         <CanType  /> 
      );
   }else{
-    return null;
+    return (
+      <QrScanner/>
+    );
   }
 };
 
