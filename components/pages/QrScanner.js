@@ -11,9 +11,16 @@ import { Platform, NativeModules } from "react-native";
 import CustomButton from "../buttons/Button";
 import AppHeader from "../contents/AppHeader";
 import { setCurrentPage } from "../../redux/multisSteps/multiStepFormSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import toaster from "../contents/Toaster";
+import { RecordRecyclables } from "../../api_manger/Recycle_Api";
+import {
+  saveNumberOfRecyclables,
+  getLocation,
+  getZone,
+  getBottleType,
+} from "../../redux/multisSteps/RecyclablesData";
 const { StatusBarManager } = NativeModules;
 
 const QrScanner = () => {
@@ -21,6 +28,9 @@ const QrScanner = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [number, setNumber] = useState(0);
+  const location = useSelector(getLocation);
+  const zone = useSelector(getZone);
+  const bottleType = useSelector(getBottleType);
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
@@ -37,7 +47,8 @@ const QrScanner = () => {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     setNumber(parseInt(data));
-    alert(` ${type} and data ${data} battles got scanned!`);
+    dispatch(saveNumberOfRecyclables(parseInt(data)));
+    alert(`${data} battles got scanned!`);
   };
 
   if (hasPermission === null) {
@@ -62,9 +73,26 @@ const QrScanner = () => {
       </SafeAreaView>
     );
   }
-  const handleGoToNextPage = () => {
-    if (number) return toaster("please scan QR from RVM", "orange");
-    dispatch(setCurrentPage(1));
+  const handleSaveRecyclables = () => {
+    if (!number) return toaster("please scan QR from RVM", "orange");
+    if (!location || !zone || !bottleType)
+      return toaster("some data are missing", "orange");
+    setLoader(true);
+    RecordRecyclables({
+      Location: location,
+      zone,
+      bootleType: bottleType,
+      numberOfRecyclables: number,
+    }).then((result) => {
+      if (result?.status == "failed") {
+        toaster("something went wrong", "orange");
+      }
+      if (result?.data?.status == "success") {
+        toaster(result?.data?.message, "green");
+      }
+      setLoader(false);
+      dispatch(setCurrentPage(1));
+    });
   };
   return (
     <SafeAreaView
@@ -112,7 +140,7 @@ const QrScanner = () => {
             title="Redeem Points"
             text="font-bold text-sm capitalize text-white text-center"
             bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-8 mx-[10vw]"
-            onPress={handleGoToNextPage}
+            onPress={handleSaveRecyclables}
           />
         </View>
       </ScrollView>
