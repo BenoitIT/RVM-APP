@@ -19,7 +19,7 @@ const CanType = () => {
   ];
   const handleGoToNextPage = () => {
     if (!selected) return toaster("select the type of bottle", "orange");
-    dispatch(setCurrentPage(1));
+    dispatch(setCurrentPage(3));
   };
   return (
     <SafeAreaView
