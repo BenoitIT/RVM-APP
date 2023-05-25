@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { showPage } from '../../redux/multisSteps/multiStepFormSlice';
 import QrScanner from './QrScanner';
 
-const Recycle = () => {
+const Recycle = ({navigation}) => {
   const currentPage = useSelector(showPage);
   if(currentPage===1) {
   return (
@@ -18,7 +18,7 @@ const Recycle = () => {
      );
   }else{
     return (
-      <QrScanner/>
+      <QrScanner navigation={navigation}/>
     );
   }
 };
