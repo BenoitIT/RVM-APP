@@ -76,7 +76,7 @@ const Login = ({ navigation }) => {
                 }
                 if (result.data?.status == "success") {
                   await AsyncStorage.setItem("accessToken", result.data.data);
-                  navigation.replace("recycle");
+                  navigation.replace("stats");
                   toaster("login success! welcome", "green");
                 }
                 setLoader(false);

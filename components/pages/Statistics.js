@@ -1,9 +1,18 @@
 import React, { useEffect } from "react";
-import { View, SafeAreaView, Text, ActivityIndicator, FlatList } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  Text,
+  ActivityIndicator,
+  FlatList,
+  Button,
+} from "react-native";
 import { Platform, NativeModules } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import Swipeable from "react-native-swipeable";
 import Table from "../contents/Table";
 import AppHeader from "../contents/AppHeader";
+import { LogBox } from "react-native";
 import CustomButton from "../buttons/Button";
 import {
   fetchHistory,
@@ -18,6 +27,17 @@ const Statistics = () => {
   useEffect(() => {
     dispatch(fetchHistory());
   }, []);
+  useEffect(() => {
+    LogBox.ignoreLogs(["Animated: `useNativeDriver`"]);
+  }, []);
+  const leftContent = <Text>good!</Text>
+
+  const rightButtons = [
+    <View className="w-[20vw] my-[5vh]">
+    <Button title="delete" color="red" onPress={()=>console.log('i was clicked')}/>
+    </View>
+  ] 
+
   return (
     <SafeAreaView
       style={{
@@ -33,16 +53,24 @@ const Statistics = () => {
           my contribution stats
         </Text>
         <View className="h-[60vh]">
-          {loader==='loading'&& <ActivityIndicator size="large" color="#00ff00"/>}
+          {loader === "loading" && (
+            <ActivityIndicator size="large" color="#00ff00" />
+          )}
           <FlatList
             data={histories}
             renderItem={({ item }) => (
-              <Table
-                date={item.createdAt}
-                contribution={item.numberOfRecyclables}
-                reward={item.totalRewards}
-                type={item.bootleType}
-              />
+              <Swipeable
+                leftContent={leftContent}
+                rightButtons={rightButtons}
+                useNativeDriver={true}
+              >
+                <Table
+                  date={item.createdAt}
+                  contribution={item.numberOfRecyclables}
+                  reward={item.totalRewards}
+                  type={item.bootleType}
+                />
+              </Swipeable>
             )}
             keyExtractor={(item) => item.id}
           />
