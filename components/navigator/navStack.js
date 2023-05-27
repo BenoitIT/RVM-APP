@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Recycle from "../pages/Recycle";
 import Statistics from "../pages/Statistics";
+import GetPaid from "../pages/GetPaid";
 
 const NavStack = () => {
   const Stack = createNativeStackNavigator();
@@ -15,6 +16,7 @@ const NavStack = () => {
       <Stack.Screen name="register" component={SignUp} />
       <Stack.Screen name="recycle" component={Recycle} />
       <Stack.Screen name="stats" component={Statistics} />
+      <Stack.Screen name="getPaid" component={GetPaid} />
     </Stack.Navigator>
   );
 };
