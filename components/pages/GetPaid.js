@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect} from "react";
 import {
   SafeAreaView,
   View,
@@ -8,11 +8,14 @@ import {
 } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { Platform, NativeModules } from "react-native";
+import { useSelector,useDispatch } from "react-redux";
+import { fetchBalance ,selectBalance} from "../../redux/rewards/getBalanceSlice";
 import CustomButton from "../buttons/Button";
 import AppHeader from "../contents/AppHeader";
 import toaster from "../contents/Toaster";
 const { StatusBarManager } = NativeModules;
 const GetPaid = () => {
+  const dispatch=useDispatch();
   const [selected, setSelected] = useState("");
   const [data, setData] = useState([
     {
@@ -24,7 +27,10 @@ const GetPaid = () => {
       value: "AirTel Money",
     },
   ]);
-
+  const balance = useSelector(selectBalance);
+  useEffect(() => {
+    dispatch(fetchBalance());
+  }, []);
   const handleCashTransfer = () => {
     if (!selected) return toaster("select where to recieve money", "orange");
   };
@@ -45,7 +51,7 @@ const GetPaid = () => {
           </Text>
           <View className="mt-[3vh]">
             <Text className="text-center text-4xl font-extrabold capitalize">current balance</Text>
-            <Text className="text-center text-3xl font-normal uppercase mt-[2vh]">2000 RWF</Text>
+            <Text className="text-center text-3xl font-normal uppercase mt-[2vh]">{balance.data} RWF</Text>
           </View>
           <View className=" px-[10vw]">
             <View>
