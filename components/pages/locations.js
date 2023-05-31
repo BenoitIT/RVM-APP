@@ -9,6 +9,13 @@ import {
 import { SelectList } from "react-native-dropdown-select-list";
 import { Platform, NativeModules } from "react-native";
 import { useDispatch } from "react-redux";
+import {
+  useFonts,
+  Jost_700Bold,
+  Jost_800ExtraBold,
+  Jost_500Medium,
+  Jost_400Regular,
+} from "@expo-google-fonts/jost";
 import CustomButton from "../buttons/Button";
 import AppHeader from "../contents/AppHeader";
 import { getRVMzones, getRVMLocation } from "../../api_manger/location_Api";
@@ -30,7 +37,7 @@ const Locations = () => {
   useEffect(() => {
     setLoader(true);
     getRVMLocation().then((result) => {
-      const res = result.data.data;
+      const res = result?.data?.data;
       const locations = res.map((obj, index) => {
         const { Location, ...rest } = obj;
         return {
@@ -44,11 +51,21 @@ const Locations = () => {
       setLoader(false);
     });
   }, []);
+  let [fontsLoaded] = useFonts({
+    extraBold: Jost_800ExtraBold,
+    semibold: Jost_700Bold,
+    medium: Jost_500Medium,
+    regular: Jost_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   const handleSelectLocation = (val) => {
     setLoader(true);
     dispatch(saveLocation(val));
     getRVMzones(val).then((result) => {
-      const zones = result.data.data;
+      const zones = result?.data?.data;
       const zoneArray = zones.map((obj, index) => {
         const { zone, ...rest } = obj;
         return {
@@ -80,19 +97,19 @@ const Locations = () => {
     >
       <ScrollView>
         <View className="mt-[3vh]">
-          <View className="border-b-3 shadow-md border-gray-800 mb-[5vh] py-[5vh]">
+          <View className="border-b-3 shadow-md border-gray-800 mb-[7vh] py-[3vh]">
             <AppHeader />
           </View>
-          <Text className="text-gray-500 font-normal text-xl mb-[4vh] mx-[3vw] align-middle text-center">
+          <Text className="text-gray-500 font-[semibold] text-xl mb-[4vh] mx-[3vw] align-middle text-center">
             Join the recycling revolution and earn rewards for every plastic
             bottle you recycle with our reverse vending machine
           </Text>
-          <Text className="text-lime-600 font-medium text-2xl mb-[5%] text-center">
+          <Text className="text-lime-600 font-[semibold]  text-2xl mb-[2vh] text-center">
             select the nearest RVM by your location
           </Text>
           {loader && <ActivityIndicator size="small" color="#00ff00" />}
           <View className=" px-[10vw]">
-            <Text className="text-gray-600 text-lg my-2">Location</Text>
+            <Text className="text-gray-600 text-lg my-2 font-[medium]">Location</Text>
             <SelectList
               setSelected={handleSelectLocation}
               data={data}
@@ -101,7 +118,7 @@ const Locations = () => {
             />
           </View>
           <View className=" px-[10vw]">
-            <Text className="text-gray-600 text-lg my-2">Zone</Text>
+            <Text className="text-gray-600 text-lg my-2 font-[medium]">Zone</Text>
             <SelectList
               setSelected={handleSelectZone}
               data={zoneData}
@@ -112,8 +129,8 @@ const Locations = () => {
           <View className="py-8">
             <CustomButton
               title="Next"
-              text="font-bold text-sm capitalize text-white text-center"
-              bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
+              text="font-[extraBold] text-sm capitalize text-white text-center"
+              bgView="flex justify-center  bg-lime-600 focus:ring-1 border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
               onPress={handleGoToNextPage}
             />
           </View>

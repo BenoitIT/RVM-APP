@@ -6,6 +6,13 @@ import {
   ScrollView,
   ActivityIndicator,
 } from "react-native";
+import {
+  useFonts,
+  Jost_700Bold,
+  Jost_800ExtraBold,
+  Jost_500Medium,
+  Jost_400Regular,
+} from "@expo-google-fonts/jost";
 import { SelectList } from "react-native-dropdown-select-list";
 import { Platform, NativeModules } from "react-native";
 import CustomButton from "../buttons/Button";
@@ -38,6 +45,16 @@ const CanType = () => {
       setLoader(false);
     });
   }, []);
+  let [fontsLoaded] = useFonts({
+    extraBold: Jost_800ExtraBold,
+    semibold: Jost_700Bold,
+    medium: Jost_500Medium,
+    regular: Jost_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   const handleGoToNextPage = () => {
     if (!selected) return toaster("select the type of bottle", "orange");
     dispatch(saveBottleType(selected))
@@ -52,16 +69,16 @@ const CanType = () => {
     >
       <ScrollView>
         <View className="mt-[3vh]">
-          <View className="border-b-3 shadow-md border-gray-800 mb-[5vh] py-[5vh]">
+          <View className="border-b-3 shadow-md border-gray-800 mb-[15vh] py-[3vh]">
             <AppHeader />
           </View>
-          <Text className="text-gray-800 font-medium text-2xl mb-[5vh] text-center">
+          <Text className="text-gray-600 font-[semibold] text-2xl mb-[5vh] text-center">
             get the reverse vending machine and throw the used beverage
             containers
           </Text>
           <View className=" px-[10vw]">
-            <Text className="text-gray-600 text-lg my-2">
-              select the type of recyclable
+            <Text className="text-gray-600 text-lg my-2 font-[medium]">
+              Select the type of recyclable
             </Text>
             {loader && <ActivityIndicator size="small" color="#00ff00" />}
             <SelectList
@@ -75,7 +92,7 @@ const CanType = () => {
             <CustomButton
               onPress={handleGoToNextPage}
               title="Next"
-              text="font-bold text-sm capitalize text-white text-center"
+              text="font-[extraBold] text-sm capitalize text-white text-center"
               bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
             />
           </View>

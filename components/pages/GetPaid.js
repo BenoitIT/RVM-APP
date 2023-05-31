@@ -9,6 +9,13 @@ import {
 import { SelectList } from "react-native-dropdown-select-list";
 import { Platform, NativeModules } from "react-native";
 import { useSelector,useDispatch } from "react-redux";
+import {
+  useFonts,
+  Jost_700Bold,
+  Jost_800ExtraBold,
+  Jost_500Medium,
+  Jost_400Regular,
+} from "@expo-google-fonts/jost";
 import { fetchBalance ,selectBalance} from "../../redux/rewards/getBalanceSlice";
 import CustomButton from "../buttons/Button";
 import AppHeader from "../contents/AppHeader";
@@ -34,6 +41,16 @@ const GetPaid = () => {
   const handleCashTransfer = () => {
     if (!selected) return toaster("select where to recieve money", "orange");
   };
+  let [fontsLoaded] = useFonts({
+    extraBold: Jost_800ExtraBold,
+    semibold: Jost_700Bold,
+    medium: Jost_500Medium,
+    regular: Jost_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <SafeAreaView
       style={{
@@ -46,7 +63,7 @@ const GetPaid = () => {
           <View className="border-b-3 shadow-md border-gray-800 mb-[3vh] py-[5vh]">
             <AppHeader />
           </View>
-          <Text className="text-lime-600 font-medium text-2xl mb-[2vh] text-center">
+          <Text className="text-lime-600 font-[medium] text-2xl mb-[2vh] text-center">
             PAYMENT INFO
           </Text>
           <View className="mt-[3vh]">
@@ -55,7 +72,7 @@ const GetPaid = () => {
           </View>
           <View className=" px-[10vw]">
             <View>
-            <Text className="text-gray-900 font-bold text-lg text-center my-4">Where do you want to get the cash?</Text>
+            <Text className="text-gray-900 font-[semibold] text-lg text-center my-4">Where do you want to get the cash?</Text>
             <SelectList
               setSelected={(val)=>setSelected(val)}
               data={data}
@@ -64,7 +81,7 @@ const GetPaid = () => {
             />
             </View>
             <View>
-            <Text className="text-gray-600 font-normal text-lg text-left mt-4 mb-2">Enter amaunt of money</Text>
+            <Text className="text-gray-600 font-[medium] text-lg text-left mt-4 mb-2">Enter amaunt of money</Text>
             <TextInput
                   keyboardType="numeric"
                   className="border border-gray-500 text-black text-sm rounded-md focus:border-lime-600 block w-full  p-1 placeholder:pl-[5vw]"
@@ -73,7 +90,7 @@ const GetPaid = () => {
                 />
             </View>
             <View>
-            <Text className="text-gray-600 font-normal text-lg text-left mt-2 mb-2">Enter Phone number</Text>
+            <Text className="text-gray-600 font-[medium] text-lg text-left mt-2 mb-2">Enter Phone number</Text>
             <TextInput
                   keyboardType="numeric"
                   className="border border-gray-500 text-black text-sm rounded-md focus:border-lime-600 block w-full  p-1 placeholder:pl-[5vw]"

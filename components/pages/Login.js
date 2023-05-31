@@ -9,6 +9,13 @@ import {
   SafeAreaView,
 } from "react-native";
 import { Platform, NativeModules } from "react-native";
+import {
+  useFonts,
+  Jost_700Bold,
+  Jost_800ExtraBold,
+  Jost_500Medium,
+  Jost_400Regular,
+} from "@expo-google-fonts/jost";
 import * as yup from "yup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Formik } from "formik";
@@ -36,6 +43,16 @@ const LoginSchema = yup.object({
 });
 const Login = ({ navigation }) => {
   const [loader, setLoader] = useState(false);
+  let [fontsLoaded] = useFonts({
+    extraBold: Jost_800ExtraBold,
+    semibold: Jost_700Bold,
+    medium: Jost_500Medium,
+    regular: Jost_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <SafeAreaView
       style={{
@@ -48,7 +65,7 @@ const Login = ({ navigation }) => {
           <Text
             style={{
               fontSize: 30,
-              fontWeight: "bold",
+              fontFamily: "extraBold",
               textAlign: "center",
               textShadowColor: "rgba(0, 0, 0, 0.2)",
               textShadowOffset: { width: 1, height: 3 },
@@ -58,7 +75,7 @@ const Login = ({ navigation }) => {
           >
             _RVM_
           </Text>
-          <Text className="text-lime-600 font-semibold text-xl mb-[25%] ml-[13vw]">
+          <Text className="text-lime-600 font-[semibold] text-xl mb-[5vh] mt-[5vh] ml-[13vw]">
             Login with Email and Password
           </Text>
           {loader && <ActivityIndicator size="large" color="#00ff00" />}
@@ -70,35 +87,43 @@ const Login = ({ navigation }) => {
               userLogin({
                 phoneNumber: values.phoneNumber,
                 password: values.password,
-              }).then(async(result) => {
-                if (result?.status == "failed") {
-                  toaster(result?.message, "orange");
-                }
-                if (result.data?.status == "success") {
-                  await AsyncStorage.setItem("accessToken", result.data.data);
-                  navigation.replace("recycle");
-                  toaster("login success! welcome", "green");
-                }
-                setLoader(false);
-              }).catch(errors =>console.log(errors));
+              })
+                .then(async (result) => {
+                  if (result?.status == "failed") {
+                    toaster(result?.message, "orange");
+                  }
+                  if (result.data?.status == "success") {
+                    await AsyncStorage.setItem("accessToken", result.data.data);
+                    navigation.replace("recycle");
+                    toaster("login success! welcome", "green");
+                  }
+                  setLoader(false);
+                })
+                .catch((errors) => console.log(errors));
               action.resetForm();
             }}
           >
             {(props) => (
               <View>
+                <Text className="text-center text-lg font-[medium] text-gray-600">
+                  Phone Number
+                </Text>
                 <TextInput
                   keyboardType="numeric"
-                  className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
-                  placeholder="Your phone number here"
+                  className="bg-transparent border border-gray-500 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
+                  placeholder="078......../072....."
                   onChangeText={props.handleChange("phoneNumber")}
                   onBlur={props.handleBlur("phoneNumber")}
                 />
                 <Text className="text-red-400 text-xs text-center  mt-2">
                   {props.touched.phoneNumber && props.errors.phoneNumber}
                 </Text>
+                <Text className="text-center text-lg font-[medium] text-gray-600 -mt-2">
+                  Password
+                </Text>
                 <TextInput
-                  className="bg-gray-200 border border-gray-200 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[3%] placeholder:text-center mx-[8vw]"
-                  placeholder="Your password here"
+                  className="bg-transparent border border-gray-500 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
+                  placeholder="pass......."
                   onChangeText={props.handleChange("password")}
                   values={props.values.password}
                   onBlur={props.handleBlur("password")}
@@ -109,13 +134,13 @@ const Login = ({ navigation }) => {
                 </Text>
                 <CustomButton
                   title="Login"
-                  text="font-bold text-sm capitalize text-white text-center"
-                  bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
+                  text="font-[extraBold] text-sm capitalize text-white text-center"
+                  bgView="flex justify-center  bg-lime-600 focus:ring-1 border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
                   onPress={props.handleSubmit}
                 />
                 <CustomButton
                   title="create an account"
-                  text="font-bold text-sm capitalize text-black text-center"
+                  text="font-[extraBold] text-sm capitalize text-black text-center"
                   bgView="flex justify-center bg-gray-300 focus:ring-1 border-b-2 shadow-sm border-gray-400 dark:shadow-sm rounded-md py-2 mx-[10vw]"
                   onPress={() => navigation.navigate("register")}
                 />
