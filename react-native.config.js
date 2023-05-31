@@ -1,3 +1,7 @@
 module.exports = {
-    assets: ['./assets/Jost/static'],
-  };
+  project: {
+    ios: {},
+    android: {},
+  },
+  assets: ['./assets/Jost/static'],
+};

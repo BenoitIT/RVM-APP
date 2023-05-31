@@ -11,6 +11,13 @@ import {
 import * as yup from "yup";
 import { Formik } from "formik";
 import { Platform, NativeModules } from "react-native";
+import {
+  useFonts,
+  Jost_700Bold,
+  Jost_800ExtraBold,
+  Jost_500Medium,
+  Jost_400Regular,
+} from "@expo-google-fonts/jost";
 import CustomButton from "../buttons/Button";
 import { userRegister } from "../../api_manger/user_Api";
 import toaster from "../contents/Toaster";
@@ -39,6 +46,15 @@ const SignupSchema = yup.object({
 });
 const SignUp = ({ navigation }) => {
   const [loader, setLoader] = useState(false);
+  let [fontsLoaded] = useFonts({
+    extraBold: Jost_800ExtraBold,
+    semibold: Jost_700Bold,
+    medium: Jost_500Medium,
+    regular: Jost_400Regular,
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <SafeAreaView
       style={{
@@ -51,7 +67,7 @@ const SignUp = ({ navigation }) => {
           <Text
             style={{
               fontSize: 30,
-              fontWeight: "bold",
+              fontFamily: "extraBold",
               textAlign: "center",
               textShadowColor: "rgba(0, 0, 0, 0.2)",
               textShadowOffset: { width: 1, height: 3 },
@@ -62,7 +78,7 @@ const SignUp = ({ navigation }) => {
           >
             _RVM_
           </Text>
-          <Text className="text-lime-600 font-semibold text-xl mb-[10%] ml-[10vw]">
+          <Text className="text-lime-600 font-[semibold] text-xl mb-[5%] mt-[5vh] mx-auto">
             Fill Identifications Below To Register
           </Text>
           {loader && <ActivityIndicator size="large" color="#00ff00" />}
@@ -101,7 +117,7 @@ const SignUp = ({ navigation }) => {
             {(props) => (
               <View>
                 <TextInput
-                  className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
+                  className="bg-transparent border border-gray-700 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
                   placeholder="Enter your First name"
                   onChangeText={props.handleChange("firstName")}
                   values={props.values.firstName}
@@ -111,7 +127,7 @@ const SignUp = ({ navigation }) => {
                   {props.touched.firstName && props.errors.firstName}
                 </Text>
                 <TextInput
-                  className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
+                  className="bg-transparent border border-gray-700 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
                   placeholder="Enter your Last name"
                   onChangeText={props.handleChange("lastname")}
                   values={props.values.lastname}
@@ -122,7 +138,7 @@ const SignUp = ({ navigation }) => {
                 </Text>
                 <TextInput
                   keyboardType="numeric"
-                  className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
+                  className="bg-transparent border border-gray-700 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
                   placeholder="Enter phone number "
                   onChangeText={props.handleChange("phoneNumber")}
                   values={props.values.phoneNumber}
@@ -132,7 +148,7 @@ const SignUp = ({ navigation }) => {
                   {props.touched.phoneNumber && props.errors.phoneNumber}
                 </Text>
                 <TextInput
-                  className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
+                  className="bg-transparent border border-gray-700 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
                   placeholder="Enter your Nationality"
                   onChangeText={props.handleChange("Nationality")}
                   values={props.values.Nationality}
@@ -142,7 +158,7 @@ const SignUp = ({ navigation }) => {
                   {props.touched.Nationality && props.errors.Nationality}
                 </Text>
                 <TextInput
-                  className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
+                  className="bg-transparent border border-gray-700 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
                   placeholder="Enter your email"
                   onChangeText={props.handleChange("email")}
                   values={props.values.email}
@@ -152,7 +168,7 @@ const SignUp = ({ navigation }) => {
                   {props.touched.email && props.errors.email}
                 </Text>
                 <TextInput
-                  className="bg-gray-200 border border-gray-200 text-black text-sm rounded-sm focus:border-lime-600 block w-5/6  p-2 mt-[3%] placeholder:text-center mx-[8vw]"
+                  className="bg-transparent border border-gray-700 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
                   placeholder="create a password"
                   onChangeText={props.handleChange("password")}
                   values={props.values.password}
@@ -164,7 +180,7 @@ const SignUp = ({ navigation }) => {
                 <CustomButton
                   title="Register"
                   text="font-bold text-sm capitalize text-white text-center"
-                  bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
+                  bgView="flex justify-center  bg-lime-600 focus:ring-1 border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
                   onPress={props.handleSubmit}
                   onBlur={props.handleBlur("password")}
                 />
