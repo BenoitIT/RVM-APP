@@ -22,6 +22,7 @@ import { Formik } from "formik";
 import CustomButton from "../buttons/Button";
 import { userLogin } from "../../api_manger/user_Api";
 import toaster from "../contents/Toaster";
+import { i18n } from "../contents/locale/translation";
 
 const { StatusBarManager } = NativeModules;
 const LoginSchema = yup.object({
@@ -75,8 +76,8 @@ const Login = ({ navigation }) => {
           >
             _RVM_
           </Text>
-          <Text className="text-lime-600 font-[semibold] text-xl mb-[5vh] mt-[5vh] ml-[13vw]">
-            Login with Email and Password
+          <Text className="text-lime-600 font-[semibold] text-xl mb-[5vh] mt-[5vh] mx-auto text-center w-[90vw]">
+           {i18n.t('login_with_Pass')}
           </Text>
           {loader && <ActivityIndicator size="large" color="#00ff00" />}
           <Formik
@@ -95,7 +96,7 @@ const Login = ({ navigation }) => {
                   if (result.data?.status == "success") {
                     await AsyncStorage.setItem("accessToken", result.data.data);
                     navigation.replace("recycle");
-                    toaster("login success! welcome", "green");
+                    toaster(i18n.t("lognSuccess"), "green");
                   }
                   setLoader(false);
                 })
@@ -106,7 +107,7 @@ const Login = ({ navigation }) => {
             {(props) => (
               <View>
                 <Text className="text-center text-lg font-[medium] text-gray-600">
-                  Phone Number
+                {i18n.t('phoneNumber')}
                 </Text>
                 <TextInput
                   keyboardType="numeric"
@@ -119,11 +120,11 @@ const Login = ({ navigation }) => {
                   {props.touched.phoneNumber && props.errors.phoneNumber}
                 </Text>
                 <Text className="text-center text-lg font-[medium] text-gray-600 -mt-2">
-                  Password
+                {i18n.t('password')}
                 </Text>
                 <TextInput
                   className="bg-transparent border border-gray-500 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
-                  placeholder="pass......."
+                  placeholder={i18n.t('pass')}
                   onChangeText={props.handleChange("password")}
                   values={props.values.password}
                   onBlur={props.handleBlur("password")}
@@ -133,13 +134,13 @@ const Login = ({ navigation }) => {
                   {props.touched.password && props.errors.password}
                 </Text>
                 <CustomButton
-                  title="Login"
+                  title={i18n.t("login")}
                   text="font-[extraBold] text-sm capitalize text-white text-center"
                   bgView="flex justify-center  bg-lime-600 focus:ring-1 border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
                   onPress={props.handleSubmit}
                 />
                 <CustomButton
-                  title="create an account"
+                  title={i18n.t("createAccount")}
                   text="font-[extraBold] text-sm capitalize text-black text-center"
                   bgView="flex justify-center bg-gray-300 focus:ring-1 border-b-2 shadow-sm border-gray-400 dark:shadow-sm rounded-md py-2 mx-[10vw]"
                   onPress={() => navigation.navigate("register")}

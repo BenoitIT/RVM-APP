@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import * as Localization from "expo-localization";
-import { I18n } from "i18n-js";
+import React from "react";
 import {
   SafeAreaView,
   View,
@@ -17,21 +15,18 @@ import {
   Jost_400Regular,
 } from "@expo-google-fonts/jost";
 import { Platform, NativeModules } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import languageCorrection from "../contents/languageCorrection";
-import translations from "../contents/locale/translation";
+import {
+  showActiveLanguage,
+  setCurrentLanguage,
+  setActiveLanguage,
+} from "../../redux/locale/languagesSlice";
+import { i18n } from "../contents/locale/translation";
 const { StatusBarManager } = NativeModules;
-
-const i18n = new I18n(translations);
-i18n.locale = Localization.locale;
-i18n.enableFallback = true;
-
-const Language = () => {
+const Language = ({ navigation }) => {
   const dispatch = useDispatch();
-  const [selectedLanguage, setSelectedLanguage] = useState("");
-  const [activeLanguage, setActiveLanguage] = useState(1);
-  const [locale, setLocale] = useState(i18n.locale);
-
+  const activeLanguage = useSelector(showActiveLanguage);
   let [fontsLoaded] = useFonts({
     extraBold: Jost_800ExtraBold,
     semibold: Jost_700Bold,
@@ -41,13 +36,10 @@ const Language = () => {
   if (!fontsLoaded) {
     return null;
   }
-  const handleGoToNextPage = () => {
-    dispatch();
-  };
   const handleChangeLocale = (locale) => {
     i18n.locale = locale.key;
-    setLocale(locale);
-    setActiveLanguage(locale.id);
+    dispatch(setCurrentLanguage(locale.key));
+    dispatch(setActiveLanguage(locale.id));
   };
   return (
     <SafeAreaView
@@ -86,7 +78,10 @@ const Language = () => {
             </TouchableOpacity>
           ))}
         </View>
-        <TouchableOpacity className="bg-slate-100 shadow-md my-[10vh] w-auto mx-auto rounded-md py-2">
+        <TouchableOpacity
+          onPress={() => navigation.navigate("home")}
+          className="bg-slate-100 shadow-md my-[10vh] w-auto mx-auto rounded-md py-2"
+        >
           <Text className="text-center text-lg font-[medium] text-lime-500 px-[8vw]">
             {i18n.t("next")}
           </Text>

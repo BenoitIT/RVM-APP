@@ -25,6 +25,7 @@ import {
   selectHistory,
   fetchStatus,
 } from "../../redux/Contribution/GetContribution";
+import { i18n } from "../contents/locale/translation";
 const { StatusBarManager } = NativeModules;
 const Statistics = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -57,12 +58,12 @@ const Statistics = ({ navigation }) => {
         <View className="border-b-3 shadow-md border-gray-800 py-[3vh]">
           <AppHeader />
         </View>
-        <Text className="text-lg uppercase text-lime-700 font-[extraBold] text-center my-[2vh]">
-          my contribution stats
+        <Text className="text-lg uppercase text-lime-700 font-[extraBold] text-center my-[1vh]">
+          {i18n.t("mystats")}
         </Text>
         <View className="bg-white shadow-md -4 rounded-md my-[1vh] w-[40vw] mx-[30vw]">
           <Text className="uppercase font-[Jost_400Regular] text-gray-700 p-1 text-center text-xs">
-            TOTAL Rewards: {balance?.data} RWF
+            {i18n.t("totalReword")}: {balance?.data} RWF
           </Text>
         </View>
         <View className="h-[60vh]">
@@ -84,7 +85,7 @@ const Statistics = ({ navigation }) => {
         </View>
         <View className="py-4">
           <CustomButton
-            title="withdraw"
+            title={i18n.t("withdraw")}
             text="font-[extraBold] text-sm capitalize text-white text-center"
             bgView="flex justify-center  bg-lime-600 focus:ring-1 border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
             onPress={handleGoToNextPage}

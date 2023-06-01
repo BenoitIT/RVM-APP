@@ -3,11 +3,13 @@ import multiStepFormSlice from "./multisSteps/multiStepFormSlice";
 import RecyclablesSlice from "./multisSteps/RecyclablesData";
 import recyclingHistorySlice from "./Contribution/GetContribution";
 import fetchBalanceSlice from "./rewards/getBalanceSlice";
+import languagesSlice from "./locale/languagesSlice";
 export const store = configureStore({
   reducer: { 
     currentPage: multiStepFormSlice,
     recyclables:RecyclablesSlice,
     recylingHistory:recyclingHistorySlice,
-    rewardBalance:fetchBalanceSlice
+    rewardBalance:fetchBalanceSlice,
+    currentLanguage: languagesSlice
   },
 });

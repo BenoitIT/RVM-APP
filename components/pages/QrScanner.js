@@ -28,6 +28,7 @@ import {
   getZone,
   getBottleType,
 } from "../../redux/multisSteps/RecyclablesData";
+import { i18n } from "../contents/locale/translation";
 const { StatusBarManager } = NativeModules;
 
 const QrScanner = ({ navigation }) => {
@@ -123,13 +124,12 @@ const QrScanner = ({ navigation }) => {
           <View className="border-b-3 shadow-md border-gray-800 mb-[5vh] py-[5vh]">
             <AppHeader />
           </View>
-          <Text className="text-gray-600 font-[semibold]  text-2xl mb-[5vh] text-center leading-8">
-            Get the reverse vending machine and throw the used beverage
-            containers and don't forget QR scanning.
+          <Text className="text-gray-600 font-[semibold]  text-2xl mb-[5vh] text-center leading-8 w-[95vw] mx-auto">
+            {i18n.t("getMachineScan")}
           </Text>
           <View className=" px-[10vw]">
             <Text className="text-lime-600 text-sm my-2 text-center uppercase font-[medium]">
-              scan QR returned by the RVM
+              {i18n.t("scanQr")}
             </Text>
             {loader && <ActivityIndicator size="large" color="#00ff00" />}
             <View className="rounded-md bg-white shadow-md shadow-slate-500">
@@ -154,7 +154,7 @@ const QrScanner = ({ navigation }) => {
             </View>
           </View>
           <CustomButton
-            title="Redeem Points"
+            title={i18n.t("Redeem")}
             text="font-[extraBold] text-sm capitalize text-white text-center"
             bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-8 mx-[10vw]"
             onPress={handleSaveRecyclables}

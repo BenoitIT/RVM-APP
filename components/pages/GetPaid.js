@@ -20,6 +20,7 @@ import { fetchBalance ,selectBalance} from "../../redux/rewards/getBalanceSlice"
 import CustomButton from "../buttons/Button";
 import AppHeader from "../contents/AppHeader";
 import toaster from "../contents/Toaster";
+import { i18n } from "../contents/locale/translation";
 const { StatusBarManager } = NativeModules;
 const GetPaid = () => {
   const dispatch=useDispatch();
@@ -64,15 +65,15 @@ const GetPaid = () => {
             <AppHeader />
           </View>
           <Text className="text-lime-600 font-[medium] text-2xl mb-[2vh] text-center">
-            PAYMENT INFO
+           {i18n.t('paymentinfo')}
           </Text>
           <View className="mt-[3vh]">
-            <Text className="text-center text-4xl font-extrabold capitalize">current balance</Text>
+            <Text className="text-center text-4xl font-extrabold capitalize">{i18n.t('currentBalance')}</Text>
             <Text className="text-center text-3xl font-normal uppercase mt-[2vh]">{balance.data} RWF</Text>
           </View>
           <View className=" px-[10vw]">
             <View>
-            <Text className="text-gray-900 font-[semibold] text-lg text-center my-4">Where do you want to get the cash?</Text>
+            <Text className="text-gray-900 font-[semibold] text-lg text-center my-4">{i18n.t('whereDoYouWantCash')}</Text>
             <SelectList
               setSelected={(val)=>setSelected(val)}
               data={data}
@@ -81,7 +82,7 @@ const GetPaid = () => {
             />
             </View>
             <View>
-            <Text className="text-gray-600 font-[medium] text-lg text-left mt-4 mb-2">Enter amaunt of money</Text>
+            <Text className="text-gray-600 font-[medium] text-lg text-left mt-4 mb-2">{i18n.t('enterMoney')}</Text>
             <TextInput
                   keyboardType="numeric"
                   className="border border-gray-500 text-black text-sm rounded-md focus:border-lime-600 block w-full  p-1 placeholder:pl-[5vw]"
@@ -90,7 +91,7 @@ const GetPaid = () => {
                 />
             </View>
             <View>
-            <Text className="text-gray-600 font-[medium] text-lg text-left mt-2 mb-2">Enter Phone number</Text>
+            <Text className="text-gray-600 font-[medium] text-lg text-left mt-2 mb-2">{i18n.t('EnterPhone')}</Text>
             <TextInput
                   keyboardType="numeric"
                   className="border border-gray-500 text-black text-sm rounded-md focus:border-lime-600 block w-full  p-1 placeholder:pl-[5vw]"
@@ -101,7 +102,7 @@ const GetPaid = () => {
           </View>
           <View className="py-8">
             <CustomButton
-              title="Transfer"
+              title={i18n.t('transfer')}
               text="font-bold text-sm capitalize text-white text-center"
               bgView="flex justify-center  bg-lime-600 focus:ring-1 border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
               onPress={handleCashTransfer}

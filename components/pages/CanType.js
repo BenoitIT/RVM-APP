@@ -22,6 +22,7 @@ import { getAllowedBottles } from "../../api_manger/Bottle_Api";
 import { useDispatch } from "react-redux";
 import toaster from "../contents/Toaster";
 import { saveBottleType } from "../../redux/multisSteps/RecyclablesData";
+import { i18n } from "../contents/locale/translation";
 const { StatusBarManager } = NativeModules;
 
 const CanType = () => {
@@ -56,8 +57,8 @@ const CanType = () => {
     return null;
   }
   const handleGoToNextPage = () => {
-    if (!selected) return toaster("select the type of bottle", "orange");
-    dispatch(saveBottleType(selected))
+    if (!selected) return toaster(i18n.t("selectbottletype"), "orange");
+    dispatch(saveBottleType(selected));
     dispatch(setCurrentPage(3));
   };
   return (
@@ -69,29 +70,28 @@ const CanType = () => {
     >
       <ScrollView>
         <View className="mt-[3vh]">
-          <View className="border-b-3 shadow-md border-gray-800 mb-[15vh] py-[3vh]">
+          <View className="border-b-3 shadow-md border-gray-800 mb-[10vh] py-[3vh]">
             <AppHeader />
           </View>
-          <Text className="text-gray-600 font-[semibold] text-2xl mb-[5vh] text-center">
-            get the reverse vending machine and throw the used beverage
-            containers
+          <Text className="text-gray-600 font-[semibold] text-2xl mb-[5vh] text-center w-[90vw] mx-auto">
+            {i18n.t("getReverse")}
           </Text>
           <View className=" px-[10vw]">
             <Text className="text-gray-600 text-lg my-2 font-[medium]">
-              Select the type of recyclable
+              {i18n.t("selectbottletype")}
             </Text>
             {loader && <ActivityIndicator size="small" color="#00ff00" />}
             <SelectList
               setSelected={(val) => setSelected(val)}
               data={data}
               save="value"
-              placeholder="select the type of bottle"
+              placeholder={i18n.t("selectbottletype")}
             />
           </View>
           <View className="py-20">
             <CustomButton
               onPress={handleGoToNextPage}
-              title="Next"
+              title={i18n.t("next")}
               text="font-[extraBold] text-sm capitalize text-white text-center"
               bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
             />
