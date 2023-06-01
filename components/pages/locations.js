@@ -25,6 +25,7 @@ import {
   saveLocation,
   saveZone,
 } from "../../redux/multisSteps/RecyclablesData";
+import { i18n } from "../contents/locale/translation";
 
 const { StatusBarManager } = NativeModules;
 const Locations = () => {
@@ -84,8 +85,8 @@ const Locations = () => {
     setSelectedZone(val);
   };
   const handleGoToNextPage = () => {
-    if (!selected) return toaster("select location", "orange");
-    if (!selectedZone) return toaster("select zone RVM is located", "orange");
+    if (!selected) return toaster(i18n.t('selectLocation'), "orange");
+    if (!selectedZone) return toaster(i18n.t('selectZone'), "orange");
     dispatch(setCurrentPage(2));
   };
   return (
@@ -97,15 +98,14 @@ const Locations = () => {
     >
       <ScrollView>
         <View className="mt-[3vh]">
-          <View className="border-b-3 shadow-md border-gray-800 mb-[7vh] py-[3vh]">
+          <View className="border-b-3 shadow-md border-gray-800 mb-[5vh] py-[3vh]">
             <AppHeader />
           </View>
           <Text className="text-gray-500 font-[semibold] text-xl mb-[4vh] mx-[3vw] align-middle text-center">
-            Join the recycling revolution and earn rewards for every plastic
-            bottle you recycle with our reverse vending machine
+            {i18n.t('joinRecycling')}
           </Text>
           <Text className="text-lime-600 font-[semibold]  text-2xl mb-[2vh] text-center">
-            select the nearest RVM by your location
+          {i18n.t('selectMachine')}
           </Text>
           {loader && <ActivityIndicator size="small" color="#00ff00" />}
           <View className=" px-[10vw]">
@@ -114,7 +114,7 @@ const Locations = () => {
               setSelected={handleSelectLocation}
               data={data}
               save="value"
-              placeholder="select location"
+              placeholder={i18n.t('selectLocation')}
             />
           </View>
           <View className=" px-[10vw]">
@@ -123,12 +123,12 @@ const Locations = () => {
               setSelected={handleSelectZone}
               data={zoneData}
               save="value"
-              placeholder="select zone"
+              placeholder={i18n.t('selectZone')}
             />
           </View>
           <View className="py-8">
             <CustomButton
-              title="Next"
+              title={i18n.t('next')}
               text="font-[extraBold] text-sm capitalize text-white text-center"
               bgView="flex justify-center  bg-lime-600 focus:ring-1 border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
               onPress={handleGoToNextPage}

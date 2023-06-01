@@ -21,6 +21,7 @@ import {
 import CustomButton from "../buttons/Button";
 import { userRegister } from "../../api_manger/user_Api";
 import toaster from "../contents/Toaster";
+import { i18n } from "../contents/locale/translation";
 
 const { StatusBarManager } = NativeModules;
 const SignupSchema = yup.object({
@@ -78,8 +79,8 @@ const SignUp = ({ navigation }) => {
           >
             _RVM_
           </Text>
-          <Text className="text-lime-600 font-[semibold] text-xl mb-[5%] mt-[5vh] mx-auto">
-            Fill Identifications Below To Register
+          <Text className="text-lime-600 font-[semibold] text-xl mb-[5%] mt-[3vh] mx-auto text-center w-[95vw]">
+            {i18n.t("fillInfo")}
           </Text>
           {loader && <ActivityIndicator size="large" color="#00ff00" />}
           <Formik
@@ -107,7 +108,7 @@ const SignUp = ({ navigation }) => {
                 }
                 if (result.data?.status == "success") {
                   navigation.replace("login");
-                  toaster("your account created successfully", "green");
+                  toaster(i18n.t("accountCreated"), "green");
                 }
                 setLoader(false);
               });
@@ -118,7 +119,7 @@ const SignUp = ({ navigation }) => {
               <View>
                 <TextInput
                   className="bg-transparent border border-gray-700 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
-                  placeholder="Enter your First name"
+                  placeholder={i18n.t("EnterLastName")}
                   onChangeText={props.handleChange("firstName")}
                   values={props.values.firstName}
                   onBlur={props.handleBlur("firstName")}
@@ -128,7 +129,7 @@ const SignUp = ({ navigation }) => {
                 </Text>
                 <TextInput
                   className="bg-transparent border border-gray-700 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
-                  placeholder="Enter your Last name"
+                  placeholder={i18n.t("EnterLastName")}
                   onChangeText={props.handleChange("lastname")}
                   values={props.values.lastname}
                   onBlur={props.handleBlur("lastname")}
@@ -139,7 +140,7 @@ const SignUp = ({ navigation }) => {
                 <TextInput
                   keyboardType="numeric"
                   className="bg-transparent border border-gray-700 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
-                  placeholder="Enter phone number "
+                  placeholder={i18n.t("EnterPhone")}
                   onChangeText={props.handleChange("phoneNumber")}
                   values={props.values.phoneNumber}
                   onBlur={props.handleBlur("phoneNumber")}
@@ -149,7 +150,7 @@ const SignUp = ({ navigation }) => {
                 </Text>
                 <TextInput
                   className="bg-transparent border border-gray-700 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
-                  placeholder="Enter your Nationality"
+                  placeholder={i18n.t("nationality")}
                   onChangeText={props.handleChange("Nationality")}
                   values={props.values.Nationality}
                   onBlur={props.handleBlur("Nationality")}
@@ -159,7 +160,7 @@ const SignUp = ({ navigation }) => {
                 </Text>
                 <TextInput
                   className="bg-transparent border border-gray-700 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
-                  placeholder="Enter your email"
+                  placeholder={i18n.t("EnterEmail")}
                   onChangeText={props.handleChange("email")}
                   values={props.values.email}
                   onBlur={props.handleBlur("email")}
@@ -169,7 +170,7 @@ const SignUp = ({ navigation }) => {
                 </Text>
                 <TextInput
                   className="bg-transparent border border-gray-700 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
-                  placeholder="create a password"
+                  placeholder={i18n.t("createPass")}
                   onChangeText={props.handleChange("password")}
                   values={props.values.password}
                   secureTextEntry={true}
@@ -178,7 +179,7 @@ const SignUp = ({ navigation }) => {
                   {props.touched.password && props.errors.password}
                 </Text>
                 <CustomButton
-                  title="Register"
+                  title={i18n.t("register")}
                   text="font-bold text-sm capitalize text-white text-center"
                   bgView="flex justify-center  bg-lime-600 focus:ring-1 border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
                   onPress={props.handleSubmit}
