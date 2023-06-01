@@ -6,11 +6,12 @@ import Login from "../pages/Login";
 import Recycle from "../pages/Recycle";
 import Statistics from "../pages/Statistics";
 import GetPaid from "../pages/GetPaid";
-
+import Language from "../pages/Languages";
 const NavStack = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="language" component={Language} />
       <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="register" component={SignUp} />
