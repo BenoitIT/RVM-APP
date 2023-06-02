@@ -30,7 +30,7 @@ const translations = {
     zone: "Zone",
     selectLocation: "select location",
     selectZone: "select zone",
-    next: "next",
+    next: "Next",
     selectbottletype: "select the type of bottle",
     getReverse:
       " get the reverse vending machine and throw the used beverage containers",
@@ -49,6 +49,11 @@ const translations = {
     whereDoYouWantCash: "Where do you want to get the cash ?",
     transfer: "transfer",
     enterMoney: "Enter amaunt of money",
+    tapToscan:"tap to rescan",
+    scanFirst:"please scan QR from RVM",
+    someDataMissing:"some data are missing",
+    bottleScanned:"battles got scanned !",
+    someWentWrong:"something went wrong",
   },
   fr: {
     selectLng: "Choisissez la langue",
@@ -100,6 +105,11 @@ const translations = {
     whereDoYouWantCash: "Où voulez-vous retirer de l'argent ?",
     transfer: "transfert",
     enterMoney: "Entrez le montant d'argent",
+    tapToscan:"Appuyez pour rescan",
+    scanFirst:"Veuillez scanner le QR du RVM",
+    someDataMissing:"Des données manquent",
+    bottleScanned:"batailles scannées !",
+    someWentWrong:"Quelque chose s'est mal passé",
   },
   kiny: {
     selectLng: "Hitamo ururimi",
@@ -123,7 +133,7 @@ const translations = {
     register: "fungura konti",
     lognSuccess: "muhawe ikaze !",
     joinRecycling:
-      "injiro muri gahunda yo kuvugura ibyakoreshejwe by'umwahariko amacupa ya parasitiki utangire kuzajya uhemberwa buri cupa washyize mu mashini yagenewe gushyirwamo ibyakoreshejwe",
+      "Injira muri gahunda yo kuvugura ibyakoreshejwe by'umwahariko amacupa ya parasitiki utangire kuzajya uhemberwa buri cupa washyize mu mashini yagenewe gushyirwamo ibyakoreshejwe",
     selectMachine: "hitamo mashine ukurikije aho uherereye",
     location: "Aho uri kubarizwa",
     zone: "Agace urimo",
@@ -148,6 +158,11 @@ const translations = {
     whereDoYouWantCash: "nihehe mushaka kwakirira amafaranga ?",
     transfer: "ohereza",
     enterMoney: "Shyiramo umubare w'amafaranga",
+    tapToscan:"gusubiramo",
+    scanFirst:"sikana ibimenyetso imashini yatanze",
+    someDataMissing:"amakuru mwatanza ntiyuzuye!",
+    bottleScanned:"niyo yujuje ibisabwa !",
+    someWentWrong:"hari ibitagenze muri sistemu",
   },
 };
 export const i18n = new I18n(translations);

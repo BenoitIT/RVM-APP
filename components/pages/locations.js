@@ -101,7 +101,7 @@ const Locations = () => {
           <View className="border-b-3 shadow-md border-gray-800 mb-[5vh] py-[3vh]">
             <AppHeader />
           </View>
-          <Text className="text-gray-500 font-[semibold] text-xl mb-[4vh] mx-[3vw] align-middle text-center">
+          <Text className="text-gray-500 font-[semibold] text-lg mb-[4vh] mx-[3vw] align-middle text-center">
             {i18n.t('joinRecycling')}
           </Text>
           <Text className="text-lime-600 font-[semibold]  text-2xl mb-[2vh] text-center">

@@ -68,8 +68,8 @@ const GetPaid = () => {
            {i18n.t('paymentinfo')}
           </Text>
           <View className="mt-[3vh]">
-            <Text className="text-center text-4xl font-extrabold capitalize">{i18n.t('currentBalance')}</Text>
-            <Text className="text-center text-3xl font-normal uppercase mt-[2vh]">{balance.data} RWF</Text>
+            <Text className="text-center text-4xl font-[extraBold] capitalize text-slate-800">{i18n.t('currentBalance')}</Text>
+            <Text className="text-center text-2xl font-[semibold] uppercase mt-[1vh] text-slate-800">{balance.data} RWF</Text>
           </View>
           <View className=" px-[10vw]">
             <View>
