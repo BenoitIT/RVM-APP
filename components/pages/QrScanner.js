@@ -65,7 +65,7 @@ const QrScanner = ({ navigation }) => {
     setScanned(true);
     setNumber(parseInt(data));
     dispatch(saveNumberOfRecyclables(parseInt(data)));
-    alert(`${data} battles got scanned!`);
+    alert(`${data +' '+i18n.t("bottleScanned")}`);
   };
 
   if (hasPermission === null) {
@@ -91,9 +91,9 @@ const QrScanner = ({ navigation }) => {
     );
   }
   const handleSaveRecyclables = () => {
-    if (!number) return toaster("please scan QR from RVM", "orange");
+    if (!number) return toaster(i18n.t("scanFirst"), "orange");
     if (!location || !zone || !bottleType)
-      return toaster("some data are missing", "orange");
+      return toaster(i18n.t("someDataMissing"), "orange");
     setLoader(true);
     RecordRecyclables({
       Location: location,
@@ -102,7 +102,7 @@ const QrScanner = ({ navigation }) => {
       numberOfRecyclables: number,
     }).then((result) => {
       if (result?.status == "failed") {
-        toaster("something went wrong", "orange");
+        toaster(i18n.t("someWentWrong"), "orange");
       }
       if (result?.data?.status == "success") {
         toaster(result?.data?.message, "green");
@@ -124,7 +124,7 @@ const QrScanner = ({ navigation }) => {
           <View className="border-b-3 shadow-md border-gray-800 mb-[5vh] py-[5vh]">
             <AppHeader />
           </View>
-          <Text className="text-gray-600 font-[semibold]  text-2xl mb-[5vh] text-center leading-8 w-[95vw] mx-auto">
+          <Text className="text-gray-600 font-[semibold]  text-xl mb-[5vh] text-center leading-8 w-[95vw] mx-auto">
             {i18n.t("getMachineScan")}
           </Text>
           <View className=" px-[10vw]">
@@ -146,7 +146,7 @@ const QrScanner = ({ navigation }) => {
               />
               {scanned && (
                 <Button
-                  title={"Tap to Scan Again"}
+                  title={i18n.t("tapToscan")}
                   onPress={() => setScanned(false)}
                   color="gray"
                 />

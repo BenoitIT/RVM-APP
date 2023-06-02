@@ -73,7 +73,7 @@ const CanType = () => {
           <View className="border-b-3 shadow-md border-gray-800 mb-[10vh] py-[3vh]">
             <AppHeader />
           </View>
-          <Text className="text-gray-600 font-[semibold] text-2xl mb-[5vh] text-center w-[90vw] mx-auto">
+          <Text className="text-gray-600 font-[semibold] text-xl mb-[5vh] text-center w-[90vw] mx-auto">
             {i18n.t("getReverse")}
           </Text>
           <View className=" px-[10vw]">

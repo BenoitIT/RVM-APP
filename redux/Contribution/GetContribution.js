@@ -31,7 +31,7 @@ const recylingHistorySlice = createSlice({
         return {
           ...state,
           status: "succeeded",
-          recylingHistory: action.payload.data.sort((a,b)=>b?.id-a?.id),
+          recylingHistory: action.payload?.data.sort((a,b)=>b?.id-a?.id),
         };
       })
       .addCase(fetchHistory.rejected, (state, action) => {
