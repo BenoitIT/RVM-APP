@@ -1,7 +1,9 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { useFonts, Jost_800ExtraBold } from "@expo-google-fonts/jost";
+import { useNavigation } from "@react-navigation/native";
 const AppHeader = () => {
+  const navigation = useNavigation();
   let [fontsLoaded] = useFonts({
     extraBold: Jost_800ExtraBold,
   });
@@ -23,17 +25,20 @@ const AppHeader = () => {
       >
         _RVM_
       </Text>
-      <View
+      <TouchableOpacity
         style={{
           fontSize: 30,
-          marginTop:5,
+          marginTop: 10,
           textShadowColor: "rgba(0, 0, 0, 0.2)",
           textShadowOffset: { width: 1, height: 3 },
           textShadowRadius: 2,
         }}
+        onPress={() => navigation.openDrawer()}
       >
-        <Entypo name="menu" size={30} color="black" />
-      </View>
+        <View>
+          <Entypo name="menu" size={30} color="black" />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
