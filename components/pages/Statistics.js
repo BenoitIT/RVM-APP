@@ -32,11 +32,10 @@ const Statistics = ({ navigation }) => {
   const histories = useSelector(selectHistory);
   const loader = useSelector(fetchStatus);
   const balance = useSelector(selectBalance);
-  console.log(histories);
   useEffect(() => {
     dispatch(fetchHistory());
     dispatch(fetchBalance());
-  }, []);
+  }, [dispatch]);
   let [fontsLoaded] = useFonts({
     extraBold: Jost_800ExtraBold,
     Jost_400Regular,
@@ -87,7 +86,7 @@ const Statistics = ({ navigation }) => {
           <CustomButton
             title={i18n.t("withdraw")}
             text="font-[extraBold] text-sm capitalize text-white text-center"
-            bgView="flex justify-center  bg-lime-600 focus:ring-1 border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
+            bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-2 w-[80vw] mx-auto"
             onPress={handleGoToNextPage}
           />
         </View>

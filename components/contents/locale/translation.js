@@ -54,6 +54,9 @@ const translations = {
     someDataMissing:"some data are missing",
     bottleScanned:"battles got scanned !",
     someWentWrong:"something went wrong",
+    forgetPassword: "forgot password ?",
+    TapTo:"Tap to",
+    reset:"Reset"
   },
   fr: {
     selectLng: "Choisissez la langue",
@@ -110,6 +113,9 @@ const translations = {
     someDataMissing:"Des données manquent",
     bottleScanned:"batailles scannées !",
     someWentWrong:"Quelque chose s'est mal passé",
+    forgetPassword: "Mot de passe oublié ?",
+    TapTo:"Cliquez pour",
+    reset:"réinitialiser"
   },
   kiny: {
     selectLng: "Hitamo ururimi",
@@ -163,6 +169,9 @@ const translations = {
     someDataMissing:"amakuru mwatanza ntiyuzuye!",
     bottleScanned:"niyo yujuje ibisabwa !",
     someWentWrong:"hari ibitagenze muri sistemu",
+    forgetPassword: "wibagiwe ijambobanga ?",
+    TapTo:"kanda hano",
+    reset:"uhange irishya"
   },
 };
 export const i18n = new I18n(translations);

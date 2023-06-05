@@ -85,8 +85,8 @@ const Locations = () => {
     setSelectedZone(val);
   };
   const handleGoToNextPage = () => {
-    if (!selected) return toaster(i18n.t('selectLocation'), "orange");
-    if (!selectedZone) return toaster(i18n.t('selectZone'), "orange");
+    if (!selected) return toaster(i18n.t("selectLocation"), "orange");
+    if (!selectedZone) return toaster(i18n.t("selectZone"), "orange");
     dispatch(setCurrentPage(2));
   };
   return (
@@ -102,35 +102,39 @@ const Locations = () => {
             <AppHeader />
           </View>
           <Text className="text-gray-500 font-[semibold] text-lg mb-[4vh] mx-[3vw] align-middle text-center">
-            {i18n.t('joinRecycling')}
+            {i18n.t("joinRecycling")}
           </Text>
           <Text className="text-lime-600 font-[semibold]  text-2xl mb-[2vh] text-center">
-          {i18n.t('selectMachine')}
+            {i18n.t("selectMachine")}
           </Text>
           {loader && <ActivityIndicator size="small" color="#00ff00" />}
           <View className=" px-[10vw]">
-            <Text className="text-gray-600 text-lg my-2 font-[medium]">Location</Text>
+            <Text className="text-gray-600 text-lg my-2 font-[medium]">
+              Location
+            </Text>
             <SelectList
               setSelected={handleSelectLocation}
               data={data}
               save="value"
-              placeholder={i18n.t('selectLocation')}
+              placeholder={i18n.t("selectLocation")}
             />
           </View>
           <View className=" px-[10vw]">
-            <Text className="text-gray-600 text-lg my-2 font-[medium]">Zone</Text>
+            <Text className="text-gray-600 text-lg my-2 font-[medium]">
+              Zone
+            </Text>
             <SelectList
               setSelected={handleSelectZone}
               data={zoneData}
               save="value"
-              placeholder={i18n.t('selectZone')}
+              placeholder={i18n.t("selectZone")}
             />
           </View>
           <View className="py-8">
             <CustomButton
-              title={i18n.t('next')}
+              title={i18n.t("next")}
               text="font-[extraBold] text-sm capitalize text-white text-center"
-              bgView="flex justify-center  bg-lime-600 focus:ring-1 border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
+              bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-8 w-[80vw] mx-auto"
               onPress={handleGoToNextPage}
             />
           </View>

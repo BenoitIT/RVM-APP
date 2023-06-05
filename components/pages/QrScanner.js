@@ -65,7 +65,7 @@ const QrScanner = ({ navigation }) => {
     setScanned(true);
     setNumber(parseInt(data));
     dispatch(saveNumberOfRecyclables(parseInt(data)));
-    alert(`${data +' '+i18n.t("bottleScanned")}`);
+    alert(`${data + " " + i18n.t("bottleScanned")}`);
   };
 
   if (hasPermission === null) {
@@ -156,7 +156,7 @@ const QrScanner = ({ navigation }) => {
           <CustomButton
             title={i18n.t("Redeem")}
             text="font-[extraBold] text-sm capitalize text-white text-center"
-            bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-8 mx-[10vw]"
+            bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-[10vh] w-[80vw] mx-auto"
             onPress={handleSaveRecyclables}
           />
         </View>
