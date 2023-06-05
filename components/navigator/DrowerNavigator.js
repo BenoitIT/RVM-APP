@@ -9,6 +9,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { Foundation } from "@expo/vector-icons";
+import { i18n } from "../contents/locale/translation";
 import CustomDrawer from "../contents/CustomDrower";
 const Drawer = createDrawerNavigator();
 
@@ -30,7 +31,7 @@ const DrawerNavigator = () => {
         name="doRecyle"
         component={Recycle}
         options={{
-          title: "CONTRIBUTE",
+          title: i18n.t("contribute"),
           drawerIcon: () => (
             <FontAwesome5 name="uncharted" size={24} color="black" />
           ),
@@ -40,7 +41,7 @@ const DrawerNavigator = () => {
         name="viewStats"
         component={Statistics}
         options={{
-          title: "STATISTICS",
+          title: i18n.t("statistics"),
           drawerIcon: () => (
             <FontAwesome name="line-chart" size={24} color="black" />
           ),
@@ -50,7 +51,7 @@ const DrawerNavigator = () => {
         name="payment"
         component={GetPaid}
         options={{
-          title: "GET PAID",
+          title: i18n.t("getpaid"),
           drawerIcon: () => (
             <FontAwesome5 name="comment-dollar" size={24} color="black" />
           ),
@@ -60,7 +61,7 @@ const DrawerNavigator = () => {
         name="map"
         component={Language}
         options={{
-          title: "GET NEAR MACHINE",
+          title:i18n.t("getMachine"),
           drawerIcon: () => (
             <MaterialCommunityIcons
               name="washing-machine"
@@ -74,7 +75,7 @@ const DrawerNavigator = () => {
         name="about"
         component={Language}
         options={{
-          title: "ABOUT RVM",
+          title: i18n.t("about"),
           drawerIcon: () => <Foundation name="info" size={24} color="black" />,
         }}
       />
@@ -82,7 +83,7 @@ const DrawerNavigator = () => {
         name="selectLang"
         component={Language}
         options={{
-          title: "LANGUAGES",
+          title: i18n.t("languages"),
           drawerIcon: () => (
             <FontAwesome name="language" size={24} color="black" />
           ),
@@ -92,7 +93,7 @@ const DrawerNavigator = () => {
         name="logout"
         component={Language}
         options={{
-          title: "LOGOUT",
+          title: i18n.t("logout"),
           drawerIcon: () => (
             <SimpleLineIcons name="logout" size={24} color="black" />
           ),

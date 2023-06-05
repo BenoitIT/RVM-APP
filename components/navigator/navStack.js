@@ -12,10 +12,10 @@ const NavStack = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="recycle" component={DrawerNavigator} />
       <Stack.Screen name="language" component={Language} />
       <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="login" component={Login} />
-      <Stack.Screen name="recycle" component={DrawerNavigator} />
       <Stack.Screen name="register" component={SignUp} />
       <Stack.Screen name="stats" component={Statistics} />
       <Stack.Screen name="getPaid" component={GetPaid} />

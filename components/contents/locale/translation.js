@@ -56,7 +56,14 @@ const translations = {
     someWentWrong:"something went wrong",
     forgetPassword: "forgot password ?",
     TapTo:"Tap to",
-    reset:"Reset"
+    reset:"Reset",
+    contribute:"CONTRIBUTE",
+    statistics:"STATISTICS",
+    getpaid:"GET PAID",
+    getMachine:"GET NEAR MACHINE",
+    about:"ABOUT",
+    languages:"LANGUAGES",
+    logout:"LOGOUT",
   },
   fr: {
     selectLng: "Choisissez la langue",
@@ -115,7 +122,14 @@ const translations = {
     someWentWrong:"Quelque chose s'est mal passé",
     forgetPassword: "Mot de passe oublié ?",
     TapTo:"Cliquez pour",
-    reset:"réinitialiser"
+    reset:"réinitialiser",
+    contribute:"CONTRIBUER",
+    statistics:"STATISTIQUE",
+    getpaid:"OBTENEZ PAYÉ",
+    getMachine:"TROUVER MACHINE",
+    about:"À PROPOS",
+    languages:"LANGAGES",
+    logout:"DÉCONNEXION",
   },
   kiny: {
     selectLng: "Hitamo ururimi",
@@ -171,7 +185,14 @@ const translations = {
     someWentWrong:"hari ibitagenze muri sistemu",
     forgetPassword: "wibagiwe ijambobanga ?",
     TapTo:"kanda hano",
-    reset:"uhange irishya"
+    reset:"uhange irishya",
+    contribute:"SHYIRAMO AMACUPA",
+    statistics:"IBYAKOZWE",
+    getpaid:"ISHYURWA",
+    getMachine:"SHAKA IMASHINI HAFI YAWE",
+    about:"IBIJYANYE NA RVM",
+    languages:"GUHINDURA URURIMI",
+    logout:"GUSOHOKA", 
   },
 };
 export const i18n = new I18n(translations);
