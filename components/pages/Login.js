@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   SafeAreaView,
+  TouchableOpacity
 } from "react-native";
 import { Platform, NativeModules } from "react-native";
 import {
@@ -136,15 +137,16 @@ const Login = ({ navigation }) => {
                 <CustomButton
                   title={i18n.t("login")}
                   text="font-[extraBold] text-sm capitalize text-white text-center"
-                  bgView="flex justify-center  bg-lime-600 focus:ring-1 border-b-2 shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-md py-2 my-4 mx-[10vw]"
+                  bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-8 w-[80vw] mx-auto"
                   onPress={props.handleSubmit}
-                />
-                <CustomButton
-                  title={i18n.t("createAccount")}
-                  text="font-[extraBold] text-sm capitalize text-black text-center"
-                  bgView="flex justify-center bg-gray-300 focus:ring-1 border-b-2 shadow-sm border-gray-400 dark:shadow-sm rounded-md py-2 mx-[10vw]"
-                  onPress={() => navigation.navigate("register")}
-                />
+                /> 
+                <View className="mt-4">
+                <Text className="text-lg text-gray-500 text-center font-[medium]">{i18n.t('forgetPassword')}</Text>
+                <TouchableOpacity className="flex flex-row justify-center gap-1">
+                <Text className="text-center text-sm font-[medium] text-gray-600">{i18n.t('TapTo')}</Text>
+                <Text className="text-center text-md text-gray-700 font-[extraBold]">{i18n.t('reset')}</Text>
+                </TouchableOpacity>
+                </View>
               </View>
             )}
           </Formik>

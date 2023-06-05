@@ -80,7 +80,7 @@ const Language = ({ navigation }) => {
         </View>
         <TouchableOpacity
           onPress={() => navigation.navigate("home")}
-          className="bg-slate-100 shadow-md my-[10vh] w-auto mx-auto rounded-md py-2"
+          className="bg-slate-100 shadow-md my-[10vh] w-auto mx-auto rounded-full py-2"
         >
           <Text className="text-center text-lg font-[medium] text-lime-500 px-[8vw]">
             {i18n.t("next")}
