@@ -174,7 +174,7 @@ const translations = {
     scanQr: "sikana ibimenyetso",
     Redeem: "reba igihembo",
     paymentinfo: "AMAKURU AJYANYE NO GUHEMBWA",
-    currentBalance: "amafaranga ari kuri konti",
+    currentBalance: "Uko konti ihagaze",
     whereDoYouWantCash: "nihehe mushaka kwakirira amafaranga ?",
     transfer: "ohereza",
     enterMoney: "Shyiramo umubare w'amafaranga",

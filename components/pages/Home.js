@@ -39,7 +39,7 @@ export const Home = ({ navigation }) => {
           <Text
             style={{
               fontFamily: "extraBold",
-              fontSize: 25,
+              fontSize: 24,
               textAlign: "center",
               textShadowColor: "rgba(0, 0, 0, 0.5)",
               textShadowOffset: { width: 1, height: 0.4 },
@@ -51,7 +51,7 @@ export const Home = ({ navigation }) => {
           </Text>
           <Text
             style={{
-              fontSize: 25,
+              fontSize: 24,
               fontFamily: "extraBold",
               textAlign: "center",
               textShadowColor: "rgba(0, 0, 0, 0.5)",
@@ -63,7 +63,9 @@ export const Home = ({ navigation }) => {
             {i18n.t("app")}
           </Text>
         </View>
-        <RVMcontainer />
+        <View className="mt-4">
+          <RVMcontainer />
+        </View>
         <View className="flex flex-col justify-center mx-[10%] mt-[10%]">
           <CustomButton
             title={i18n.t("login")}
@@ -71,12 +73,12 @@ export const Home = ({ navigation }) => {
             bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-8"
             onPress={() => navigation.navigate("login")}
           />
-           <CustomButton
-                  title={i18n.t("createAccount")}
-                  text="font-[extraBold] text-sm capitalize text-black text-center"
-                  bgView="flex justify-center  bg-gray-300 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-4"
-                  onPress={() => navigation.navigate("register")}
-                />
+          <CustomButton
+            title={i18n.t("createAccount")}
+            text="font-[extraBold] text-sm capitalize text-black text-center"
+            bgView="flex justify-center  bg-gray-300 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-4"
+            onPress={() => navigation.navigate("register")}
+          />
         </View>
       </View>
     </SafeAreaView>

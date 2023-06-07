@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   SafeAreaView,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { Platform, NativeModules } from "react-native";
 import {
@@ -77,8 +77,8 @@ const Login = ({ navigation }) => {
           >
             _RVM_
           </Text>
-          <Text className="text-lime-600 font-[semibold] text-xl mb-[5vh] mt-[5vh] mx-auto text-center w-[90vw]">
-           {i18n.t('login_with_Pass')}
+          <Text className="text-lime-600 font-[semibold] text-xl mt-[3vh] mb-[3vh] mx-auto text-center w-[90vw]">
+            {i18n.t("login_with_Pass")}
           </Text>
           {loader && <ActivityIndicator size="large" color="#00ff00" />}
           <Formik
@@ -108,7 +108,7 @@ const Login = ({ navigation }) => {
             {(props) => (
               <View>
                 <Text className="text-center text-lg font-[medium] text-gray-600">
-                {i18n.t('phoneNumber')}
+                  {i18n.t("phoneNumber")}
                 </Text>
                 <TextInput
                   keyboardType="numeric"
@@ -121,11 +121,11 @@ const Login = ({ navigation }) => {
                   {props.touched.phoneNumber && props.errors.phoneNumber}
                 </Text>
                 <Text className="text-center text-lg font-[medium] text-gray-600 -mt-2">
-                {i18n.t('password')}
+                  {i18n.t("password")}
                 </Text>
                 <TextInput
                   className="bg-transparent border border-gray-500 text-black  text-sm rounded-sm focus:border-lime-600 block w-5/6 p-2 mt-[2%] placeholder:text-center placeholder:font-[regular] mx-[8vw]"
-                  placeholder={i18n.t('pass')}
+                  placeholder={i18n.t("pass")}
                   onChangeText={props.handleChange("password")}
                   values={props.values.password}
                   onBlur={props.handleBlur("password")}
@@ -139,13 +139,19 @@ const Login = ({ navigation }) => {
                   text="font-[extraBold] text-sm capitalize text-white text-center"
                   bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-8 w-[80vw] mx-auto"
                   onPress={props.handleSubmit}
-                /> 
+                />
                 <View className="mt-4">
-                <Text className="text-lg text-gray-500 text-center font-[medium]">{i18n.t('forgetPassword')}</Text>
-                <TouchableOpacity className="flex flex-row justify-center gap-1">
-                <Text className="text-center text-sm font-[medium] text-gray-600">{i18n.t('TapTo')}</Text>
-                <Text className="text-center text-md text-gray-700 font-[extraBold]">{i18n.t('reset')}</Text>
-                </TouchableOpacity>
+                  <Text className="text-lg text-gray-500 text-center font-[medium]">
+                    {i18n.t("forgetPassword")}
+                  </Text>
+                  <TouchableOpacity className="flex flex-row justify-center gap-1">
+                    <Text className="text-center text-sm font-[medium] text-gray-600">
+                      {i18n.t("TapTo")}
+                    </Text>
+                    <Text className="text-center text-md text-gray-700 font-[extraBold]">
+                      {i18n.t("reset")}
+                    </Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             )}

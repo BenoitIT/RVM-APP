@@ -26,16 +26,18 @@ import {
   fetchStatus,
 } from "../../redux/Contribution/GetContribution";
 import { i18n } from "../contents/locale/translation";
+import { showActiveLanguage } from "../../redux/locale/languagesSlice";
 const { StatusBarManager } = NativeModules;
 const Statistics = ({ navigation }) => {
   const dispatch = useDispatch();
   const histories = useSelector(selectHistory);
   const loader = useSelector(fetchStatus);
   const balance = useSelector(selectBalance);
+  const locale = useSelector(showActiveLanguage);
   useEffect(() => {
     dispatch(fetchHistory());
     dispatch(fetchBalance());
-  }, [dispatch]);
+  }, [dispatch, locale]);
   let [fontsLoaded] = useFonts({
     extraBold: Jost_800ExtraBold,
     Jost_400Regular,

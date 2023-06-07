@@ -51,7 +51,7 @@ const Locations = () => {
       setSelectedZone("");
       setLoader(false);
     });
-  }, []);
+  }, [data]);
   let [fontsLoaded] = useFonts({
     extraBold: Jost_800ExtraBold,
     semibold: Jost_700Bold,
@@ -104,7 +104,7 @@ const Locations = () => {
           <Text className="text-gray-500 font-[semibold] text-lg mb-[4vh] mx-[3vw] align-middle text-center">
             {i18n.t("joinRecycling")}
           </Text>
-          <Text className="text-lime-600 font-[semibold]  text-2xl mb-[2vh] text-center">
+          <Text className="text-lime-600 font-[semibold]  text-xl mb-[2vh] text-center">
             {i18n.t("selectMachine")}
           </Text>
           {loader && <ActivityIndicator size="small" color="#00ff00" />}

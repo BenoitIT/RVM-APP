@@ -1,4 +1,3 @@
-import React,{useEffect ,useState} from "react";
 import {
   SafeAreaView,
   View,
@@ -16,15 +15,17 @@ import {
 } from "@expo-google-fonts/jost";
 import { Platform, NativeModules } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import languageCorrection from "../contents/languageCorrection";
 import {
   showActiveLanguage,
   setCurrentLanguage,
   setActiveLanguage,
 } from "../../redux/locale/languagesSlice";
 import { i18n } from "../contents/locale/translation";
+import languageCorrection from "./languageCorrection";
+import AppHeader from "./AppHeader";
 const { StatusBarManager } = NativeModules;
-const Language = ({ navigation }) => {
+
+const DashLanguages = ({ navigation }) => {
   const dispatch = useDispatch();
   const activeLanguage = useSelector(showActiveLanguage);
   let [fontsLoaded] = useFonts({
@@ -49,17 +50,16 @@ const Language = ({ navigation }) => {
       }}
     >
       <ScrollView>
-        <View className="mt-[20vh]">
-          <Text className="text-green-600 font-[semibold] text-2xl mb-[10vh] text-center opacity-80">
-            {i18n.t("selectLng")}
-          </Text>
-          <View className=" px-[10vw]"></View>
+        <View className="border-b-3 shadow-md border-gray-800 py-[3vh] w-full">
+          <AppHeader />
+        </View>
+        <View className=" px-[10vw] my-10">
           {languageCorrection.map((language) => (
             <TouchableOpacity
               key={language.id}
               onPress={() => handleChangeLocale(language)}
             >
-              <View className="flex flex-row mx-auto my-1 bg-slate-100 w-full px-[20vw] py-[3vh] shadow-md border-1 border-transparent shadow-gray-300">
+              <View className="flex flex-row mx-auto my-1 bg-transparent w-full px-[10vw] py-[3vh] shadow-md border-1 border-transparent">
                 <Image
                   style={{ width: 30, height: 20, marginTop: 4 }}
                   source={language.icon}
@@ -78,16 +78,8 @@ const Language = ({ navigation }) => {
             </TouchableOpacity>
           ))}
         </View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("home")}
-          className="bg-slate-100 shadow-md my-[10vh] w-auto mx-auto rounded-full py-2"
-        >
-          <Text className="text-center text-lg font-[medium] text-lime-500 px-[8vw]">
-            {i18n.t("next")}
-          </Text>
-        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
 };
-export default Language;
+export default DashLanguages;
