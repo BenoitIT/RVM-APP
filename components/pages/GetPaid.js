@@ -74,7 +74,7 @@ const GetPaid = () => {
           </View>
           <View className=" px-[10vw]">
             <View>
-              <Text className="text-gray-900 font-[semibold] text-lg text-center my-4">
+              <Text className="text-gray-900 font-[medium] text-[2.2vh] text-left my-4 w-auto">
                 {i18n.t("whereDoYouWantCash")}
               </Text>
               <SelectList
@@ -111,7 +111,7 @@ const GetPaid = () => {
             <CustomButton
               title={i18n.t("transfer")}
               text="font-bold text-sm capitalize text-white text-center"
-              bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-8 w-[80vw] mx-auto"
+              bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-5 w-[80vw] mx-auto"
               onPress={handleCashTransfer}
             />
           </View>

@@ -4,6 +4,8 @@ import Recycle from "../pages/Recycle";
 import Statistics from "../pages/Statistics";
 import GetPaid from "../pages/GetPaid";
 import Language from "../pages/Languages";
+import DashLanguages from "../contents/dashLanguages";
+import Logout from "../pages/Logout";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -81,7 +83,7 @@ const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="selectLang"
-        component={Language}
+        component={DashLanguages}
         options={{
           title: i18n.t("languages"),
           drawerIcon: () => (
@@ -91,7 +93,7 @@ const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="logout"
-        component={Language}
+        component={Logout}
         options={{
           title: i18n.t("logout"),
           drawerIcon: () => (
