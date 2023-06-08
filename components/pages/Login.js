@@ -91,17 +91,22 @@ const Login = ({ navigation }) => {
                 password: values.password,
               })
                 .then(async (result) => {
+                  if(!result.message||!result.data){
+                    await toaster(i18n.t("tryAgain"), "orange");
+                  }
                   if (result?.status == "failed") {
-                    toaster(result?.message, "orange");
+                    await toaster(result?.message, "orange");
                   }
                   if (result.data?.status == "success") {
                     await AsyncStorage.setItem("accessToken", result.data.data);
                     navigation.replace("recycle");
-                    toaster(i18n.t("lognSuccess"), "green");
+                    await toaster(i18n.t("lognSuccess"), "green");
                   }
                   setLoader(false);
                 })
-                .catch((errors) => console.log(errors));
+                .catch(() =>
+                  toaster(i18n.t("checkConnections"), "orange")
+                );
               action.resetForm();
             }}
           >

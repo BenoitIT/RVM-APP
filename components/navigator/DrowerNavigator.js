@@ -5,6 +5,7 @@ import Statistics from "../pages/Statistics";
 import GetPaid from "../pages/GetPaid";
 import Language from "../pages/Languages";
 import DashLanguages from "../contents/dashLanguages";
+import RvmMap from "../pages/map";
 import Logout from "../pages/Logout";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
@@ -61,7 +62,7 @@ const DrawerNavigator = () => {
       />
       <Drawer.Screen
         name="map"
-        component={Language}
+        component={RvmMap}
         options={{
           title:i18n.t("getMachine"),
           drawerIcon: () => (

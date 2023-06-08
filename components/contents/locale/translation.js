@@ -64,6 +64,8 @@ const translations = {
     about:"ABOUT",
     languages:"LANGUAGES",
     logout:"LOGOUT",
+    checkConnections:"check your internet connections !",
+    tryAgain:"try again !",
   },
   fr: {
     selectLng: "Choisissez la langue",
@@ -130,6 +132,8 @@ const translations = {
     about:"À PROPOS",
     languages:"LANGAGES",
     logout:"DÉCONNEXION",
+    checkConnections:"Vérifiez vos connexions Internet !",
+    tryAgain:"Essaye à nouveau !",
   },
   kiny: {
     selectLng: "Hitamo ururimi",
@@ -193,6 +197,8 @@ const translations = {
     about:"IBIJYANYE NA RVM",
     languages:"GUHINDURA URURIMI",
     logout:"GUSOHOKA", 
+    checkConnections:"murandasi yanyu ntabwo iri gukora!",
+    tryAgain:"mwongere mugerageze!",
   },
 };
 export const i18n = new I18n(translations);
