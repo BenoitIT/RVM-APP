@@ -69,7 +69,7 @@ const GetPaid = () => {
               {i18n.t("currentBalance")}
             </Text>
             <Text className="text-center text-2xl font-[semibold] uppercase mt-[1vh] text-slate-800">
-              {balance.data} RWF
+              {balance?.data} RWF
             </Text>
           </View>
           <View className=" px-[10vw]">
