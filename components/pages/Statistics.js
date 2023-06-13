@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   Text,
   ActivityIndicator,
-  FlatList,
   TouchableHighlight,
 } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
@@ -54,10 +53,10 @@ const Statistics = ({ navigation }) => {
     return (
       <TouchableHighlight>
         <Table
-          date={props.createdAt}
-          contribution={props.numberOfRecyclables}
-          reward={props.totalRewards}
-          type={props.bootleType}
+          date={props.data.item.createdAt}
+          contribution={props.data.item.numberOfRecyclables}
+          reward={props.data.item.totalRewards}
+          type={props.data.item.bootleType}
         />
       </TouchableHighlight>
     );
@@ -65,7 +64,42 @@ const Statistics = ({ navigation }) => {
   const renderItems = (data, rowMap) => {
     return <VisibleItem data={data}/>
   };
-  const renderHiddenItems=()=>{}
+
+  const closeRow=(rowMap,rowKey)=>{
+    if(rowMap[rowKey]){
+    rowMap[rowKey].closeRow();
+  }
+}
+  const deleteRow=(rowMap,rowKey)=>{
+    closeRow(rowMap,rowKey);
+
+    
+  }
+  const HiddenItemWithActions=props=>{
+     const {Ondelete}=props;
+     return(
+      <View className="h-full w-4/4">
+       <View className="flex flex-row items-end my-10 ml-6">
+          <CustomButton
+            title="Delete"
+            text="font-medium text-xs capitalize text-white text-center"
+            bgView="flex justify-center bg-red-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 rounded-2xl py-2 px-4"
+            onPress={Ondelete}
+          />
+      </View>
+      </View>
+     )
+  }
+  const renderHiddenItems=(data,rowMap)=>{
+    return <HiddenItemWithActions
+    data={data}
+    rowMap={rowMap}
+    itemKey={data.item.id}
+    Onclose={()=>closeRow(rowMap,data.item.id)}
+    Ondelete={()=>deleteRow(rowMap,data.item.id)}
+    />
+  }
+  
   return (
     <SafeAreaView
       style={{
@@ -93,6 +127,8 @@ const Statistics = ({ navigation }) => {
             data={histories}
             renderItem={renderItems}
             renderHiddenItem={renderHiddenItems}
+            leftOpenValue={75}
+           rightOpenValue={-120}
           />
         </View>
         <View className="py-4">
