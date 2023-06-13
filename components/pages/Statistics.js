@@ -5,7 +5,9 @@ import {
   Text,
   ActivityIndicator,
   FlatList,
+  TouchableHighlight,
 } from "react-native";
+import { SwipeListView } from "react-native-swipe-list-view";
 import { Platform, NativeModules } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -48,6 +50,22 @@ const Statistics = ({ navigation }) => {
   const handleGoToNextPage = () => {
     navigation.navigate("getPaid");
   };
+  const VisibleItem = (props) => {
+    return (
+      <TouchableHighlight>
+        <Table
+          date={props.createdAt}
+          contribution={props.numberOfRecyclables}
+          reward={props.totalRewards}
+          type={props.bootleType}
+        />
+      </TouchableHighlight>
+    );
+  };
+  const renderItems = (data, rowMap) => {
+    return <VisibleItem data={data}/>
+  };
+  const renderHiddenItems=()=>{}
   return (
     <SafeAreaView
       style={{
@@ -71,17 +89,10 @@ const Statistics = ({ navigation }) => {
           {loader === "loading" && (
             <ActivityIndicator size="large" color="#00ff00" />
           )}
-          <FlatList
+          <SwipeListView
             data={histories}
-            renderItem={({ item }) => (
-              <Table
-                date={item.createdAt}
-                contribution={item.numberOfRecyclables}
-                reward={item.totalRewards}
-                type={item.bootleType}
-              />
-            )}
-            keyExtractor={(item) => item?.id}
+            renderItem={renderItems}
+            renderHiddenItem={renderHiddenItems}
           />
         </View>
         <View className="py-4">

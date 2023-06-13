@@ -25,7 +25,7 @@ const translations = {
     lognSuccess: "login success! welcome",
     joinRecycling:
       "Join the recycling revolution and earn rewards for every plastic bottle you recycle with our reverse vending machine",
-    selectMachine: "select the nearest RVM by your location",
+    selectMachine: "Select the nearest RVM by your location",
     location: "Location",
     zone: "Zone",
     selectLocation: "select location",
