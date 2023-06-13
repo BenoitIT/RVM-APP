@@ -15,3 +15,19 @@ return result;
       return err.response.data; 
   }
 }
+
+export const deleteRecyclable = async (id)=>{
+  try{
+const token = await AsyncStorage.getItem("accessToken");
+const result = await ApiManager(`/api/rvm/recycle/recyclables/${id}`,{
+  method: 'DELETE',
+  headers: {
+    'Authorization': `Bearer ${token}`
+  },
+});
+return result;
+  }
+  catch(err){
+      return err.response.data; 
+  }
+}

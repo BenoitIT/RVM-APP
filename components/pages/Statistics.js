@@ -4,8 +4,9 @@ import {
   SafeAreaView,
   Text,
   ActivityIndicator,
-  FlatList,
+  TouchableHighlight,
 } from "react-native";
+import { SwipeListView } from "react-native-swipe-list-view";
 import { Platform, NativeModules } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -24,14 +25,19 @@ import {
   fetchHistory,
   selectHistory,
   fetchStatus,
+  fetchMessage,
+  deleteHistory,
 } from "../../redux/Contribution/GetContribution";
+import toaster from "../contents/Toaster";
 import { i18n } from "../contents/locale/translation";
 import { showActiveLanguage } from "../../redux/locale/languagesSlice";
+
 const { StatusBarManager } = NativeModules;
 const Statistics = ({ navigation }) => {
   const dispatch = useDispatch();
   const histories = useSelector(selectHistory);
   const loader = useSelector(fetchStatus);
+  const message = useSelector(fetchMessage);
   const balance = useSelector(selectBalance);
   const locale = useSelector(showActiveLanguage);
   useEffect(() => {
@@ -45,9 +51,64 @@ const Statistics = ({ navigation }) => {
   if (!fontsLoaded) {
     return null;
   }
+  if (message !== "") {
+    toaster(i18n.t("deleteSuccess"), "green");
+  }
   const handleGoToNextPage = () => {
     navigation.navigate("getPaid");
   };
+  const VisibleItem = (props) => {
+    return (
+      <TouchableHighlight>
+        <Table
+          date={props.data.item.createdAt}
+          contribution={props.data.item.numberOfRecyclables}
+          reward={props.data.item.totalRewards}
+          type={props.data.item.bootleType}
+        />
+      </TouchableHighlight>
+    );
+  };
+  const renderItems = (data, rowMap) => {
+    return <VisibleItem data={data} />;
+  };
+
+  const closeRow = (rowMap, rowKey) => {
+    if (rowMap[rowKey]) {
+      rowMap[rowKey].closeRow();
+    }
+  };
+  const deleteRow = (rowMap, rowKey) => {
+    closeRow(rowMap, rowKey);
+   dispatch(deleteHistory(rowKey));
+  };
+  const HiddenItemWithActions = (props) => {
+    const { Ondelete } = props;
+    return (
+      <View className="h-full w-4/4">
+        <View className="flex flex-row items-end my-10 ml-6">
+          <CustomButton
+            title={i18n.t("delete")}
+            text="font-medium text-xs capitalize text-white text-center"
+            bgView="flex justify-center bg-red-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 rounded-2xl py-2 px-4"
+            onPress={Ondelete}
+          />
+        </View>
+      </View>
+    );
+  };
+  const renderHiddenItems = (data, rowMap) => {
+    return (
+      <HiddenItemWithActions
+        data={data}
+        rowMap={rowMap}
+        itemKey={data.item.id}
+        Onclose={() => closeRow(rowMap, data.item.id)}
+        Ondelete={() => deleteRow(rowMap, data.item.id)}
+      />
+    );
+  };
+
   return (
     <SafeAreaView
       style={{
@@ -71,17 +132,12 @@ const Statistics = ({ navigation }) => {
           {loader === "loading" && (
             <ActivityIndicator size="large" color="#00ff00" />
           )}
-          <FlatList
+          <SwipeListView
             data={histories}
-            renderItem={({ item }) => (
-              <Table
-                date={item.createdAt}
-                contribution={item.numberOfRecyclables}
-                reward={item.totalRewards}
-                type={item.bootleType}
-              />
-            )}
-            keyExtractor={(item) => item?.id}
+            renderItem={renderItems}
+            renderHiddenItem={renderHiddenItems}
+            leftOpenValue={75}
+            rightOpenValue={-120}
           />
         </View>
         <View className="py-4">

@@ -81,8 +81,8 @@ const Locations = () => {
     setLoader(false);
   };
   const handleSelectZone = (val) => {
-    dispatch(saveZone(val));
     setSelectedZone(val);
+    dispatch(saveZone(val));
   };
   const handleGoToNextPage = () => {
     if (!selected) return toaster(i18n.t("selectLocation"), "orange");
@@ -97,19 +97,19 @@ const Locations = () => {
       }}
     >
       <ScrollView>
-        <View className="mt-[3vh]">
+        <View className="mt-[4vh]">
           <View className="border-b-3 shadow-md border-gray-800 mb-[5vh] py-[3vh]">
             <AppHeader />
           </View>
-          <Text className="text-gray-500 font-[semibold] text-lg mb-[4vh] mx-[3vw] align-middle text-center">
+          <Text className="text-gray-500 font-[semibold] text-base mb-[4vh] mx-[5vw] align-middle text-center">
             {i18n.t("joinRecycling")}
           </Text>
-          <Text className="text-lime-600 font-[semibold]  text-xl mb-[2vh] text-center">
+          <Text className="text-lime-600 font-[semibold]  text-lg mb-[2vh] text-center">
             {i18n.t("selectMachine")}
           </Text>
           {loader && <ActivityIndicator size="small" color="#00ff00" />}
           <View className=" px-[10vw]">
-            <Text className="text-gray-600 text-lg my-2 font-[medium]">
+            <Text className="text-gray-600 text-base my-2 font-[medium]">
               Location
             </Text>
             <SelectList
@@ -120,7 +120,7 @@ const Locations = () => {
             />
           </View>
           <View className=" px-[10vw]">
-            <Text className="text-gray-600 text-lg my-2 font-[medium]">
+            <Text className="text-gray-600 text-base my-2 font-[medium]">
               Zone
             </Text>
             <SelectList
