@@ -25,14 +25,19 @@ import {
   fetchHistory,
   selectHistory,
   fetchStatus,
+  fetchMessage,
+  deleteHistory,
 } from "../../redux/Contribution/GetContribution";
+import toaster from "../contents/Toaster";
 import { i18n } from "../contents/locale/translation";
 import { showActiveLanguage } from "../../redux/locale/languagesSlice";
+
 const { StatusBarManager } = NativeModules;
 const Statistics = ({ navigation }) => {
   const dispatch = useDispatch();
   const histories = useSelector(selectHistory);
   const loader = useSelector(fetchStatus);
+  const message = useSelector(fetchMessage);
   const balance = useSelector(selectBalance);
   const locale = useSelector(showActiveLanguage);
   useEffect(() => {
@@ -45,6 +50,9 @@ const Statistics = ({ navigation }) => {
   });
   if (!fontsLoaded) {
     return null;
+  }
+  if (message !== "") {
+    toaster(i18n.t("deleteSuccess"), "green");
   }
   const handleGoToNextPage = () => {
     navigation.navigate("getPaid");
@@ -62,44 +70,45 @@ const Statistics = ({ navigation }) => {
     );
   };
   const renderItems = (data, rowMap) => {
-    return <VisibleItem data={data}/>
+    return <VisibleItem data={data} />;
   };
 
-  const closeRow=(rowMap,rowKey)=>{
-    if(rowMap[rowKey]){
-    rowMap[rowKey].closeRow();
-  }
-}
-  const deleteRow=(rowMap,rowKey)=>{
-    closeRow(rowMap,rowKey);
-
-    
-  }
-  const HiddenItemWithActions=props=>{
-     const {Ondelete}=props;
-     return(
+  const closeRow = (rowMap, rowKey) => {
+    if (rowMap[rowKey]) {
+      rowMap[rowKey].closeRow();
+    }
+  };
+  const deleteRow = (rowMap, rowKey) => {
+    closeRow(rowMap, rowKey);
+   dispatch(deleteHistory(rowKey));
+  };
+  const HiddenItemWithActions = (props) => {
+    const { Ondelete } = props;
+    return (
       <View className="h-full w-4/4">
-       <View className="flex flex-row items-end my-10 ml-6">
+        <View className="flex flex-row items-end my-10 ml-6">
           <CustomButton
-            title="Delete"
+            title={i18n.t("delete")}
             text="font-medium text-xs capitalize text-white text-center"
             bgView="flex justify-center bg-red-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 rounded-2xl py-2 px-4"
             onPress={Ondelete}
           />
+        </View>
       </View>
-      </View>
-     )
-  }
-  const renderHiddenItems=(data,rowMap)=>{
-    return <HiddenItemWithActions
-    data={data}
-    rowMap={rowMap}
-    itemKey={data.item.id}
-    Onclose={()=>closeRow(rowMap,data.item.id)}
-    Ondelete={()=>deleteRow(rowMap,data.item.id)}
-    />
-  }
-  
+    );
+  };
+  const renderHiddenItems = (data, rowMap) => {
+    return (
+      <HiddenItemWithActions
+        data={data}
+        rowMap={rowMap}
+        itemKey={data.item.id}
+        Onclose={() => closeRow(rowMap, data.item.id)}
+        Ondelete={() => deleteRow(rowMap, data.item.id)}
+      />
+    );
+  };
+
   return (
     <SafeAreaView
       style={{
@@ -128,7 +137,7 @@ const Statistics = ({ navigation }) => {
             renderItem={renderItems}
             renderHiddenItem={renderHiddenItems}
             leftOpenValue={75}
-           rightOpenValue={-120}
+            rightOpenValue={-120}
           />
         </View>
         <View className="py-4">

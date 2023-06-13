@@ -66,6 +66,8 @@ const translations = {
     logout:"LOGOUT",
     checkConnections:"check your internet connections !",
     tryAgain:"try again !",
+    deleteSuccess:"deleted successfully !",
+    delete:"delete",
   },
   fr: {
     selectLng: "Choisissez la langue",
@@ -134,6 +136,8 @@ const translations = {
     logout:"DÉCONNEXION",
     checkConnections:"Vérifiez vos connexions Internet !",
     tryAgain:"Essaye à nouveau !",
+    deleteSuccess:"supprimé avec succès !",
+    delete:"supprimé",
   },
   kiny: {
     selectLng: "Hitamo ururimi",
@@ -199,6 +203,8 @@ const translations = {
     logout:"GUSOHOKA", 
     checkConnections:"murandasi yanyu ntabwo iri gukora!",
     tryAgain:"mwongere mugerageze!",
+    deleteSuccess:"gusiba byagenze neza !",
+    delete:"siba",
   },
 };
 export const i18n = new I18n(translations);
