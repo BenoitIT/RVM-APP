@@ -34,9 +34,11 @@ const Locations = () => {
   const [data, setData] = useState("");
   const [zoneData, setZoneData] = useState("");
   const [loader, setLoader] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     setLoader(true);
+    setDisabled(true);
     getRVMLocation().then((result) => {
       const res = result?.data?.data;
       const locations = res.map((obj, index) => {
@@ -50,6 +52,7 @@ const Locations = () => {
       setData(locations);
       setSelectedZone("");
       setLoader(false);
+      setDisabled(false);
     });
   }, [data]);
   let [fontsLoaded] = useFonts({
@@ -64,6 +67,7 @@ const Locations = () => {
   }
   const handleSelectLocation = (val) => {
     setLoader(true);
+    setDisabled(true);
     dispatch(saveLocation(val));
     getRVMzones(val).then((result) => {
       const zones = result?.data?.data;
@@ -79,14 +83,13 @@ const Locations = () => {
     });
     setSelected(val);
     setLoader(false);
+    setDisabled(false);
   };
   const handleSelectZone = (val) => {
-    setSelectedZone(val);
     dispatch(saveZone(val));
   };
   const handleGoToNextPage = () => {
     if (!selected) return toaster(i18n.t("selectLocation"), "orange");
-    if (!selectedZone) return toaster(i18n.t("selectZone"), "orange");
     dispatch(setCurrentPage(2));
   };
   return (
@@ -133,8 +136,9 @@ const Locations = () => {
           <View className="py-8">
             <CustomButton
               title={i18n.t("next")}
+              disabled={disabled}
               text="font-[extraBold] text-sm capitalize text-white text-center"
-              bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-8 w-[80vw] mx-auto"
+              bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-8 w-[80vw] mx-auto disabled:opacity-25"
               onPress={handleGoToNextPage}
             />
           </View>

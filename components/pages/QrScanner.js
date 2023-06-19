@@ -40,6 +40,7 @@ const QrScanner = ({ navigation }) => {
   const zone = useSelector(getZone);
   const bottleType = useSelector(getBottleType);
   const [loader, setLoader] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     setLoader(true);
@@ -95,6 +96,7 @@ const QrScanner = ({ navigation }) => {
     if (!location || !zone || !bottleType)
       return toaster(i18n.t("someDataMissing"), "orange");
     setLoader(true);
+    setDisabled(true)
     RecordRecyclables({
       Location: location,
       zone,
@@ -108,6 +110,7 @@ const QrScanner = ({ navigation }) => {
         toaster(result?.data?.message, "green");
       }
       setLoader(false);
+      setDisabled(false)
       navigation.navigate("stats");
       dispatch(setCurrentPage(1));
     });
@@ -155,8 +158,9 @@ const QrScanner = ({ navigation }) => {
           </View>
           <CustomButton
             title={i18n.t("Redeem")}
+            disabled={disabled}
             text="font-[extraBold] text-sm capitalize text-white text-center"
-            bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-[10vh] w-[80vw] mx-auto"
+            bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-[10vh] w-[80vw] mx-auto disabled:opacity-25"
             onPress={handleSaveRecyclables}
           />
         </View>

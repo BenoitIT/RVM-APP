@@ -143,6 +143,7 @@ const Statistics = ({ navigation }) => {
         <View className="py-4">
           <CustomButton
             title={i18n.t("withdraw")}
+            disabled={false}
             text="font-[extraBold] text-sm capitalize text-white text-center"
             bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-2 w-[80vw] mx-auto"
             onPress={handleGoToNextPage}

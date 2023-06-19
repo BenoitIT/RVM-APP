@@ -1,4 +1,4 @@
-import React,{useEffect ,useState} from "react";
+import React from "react";
 import {
   SafeAreaView,
   View,
@@ -50,7 +50,7 @@ const Language = ({ navigation }) => {
     >
       <ScrollView>
         <View className="mt-[20vh]">
-          <Text className="text-green-600 font-[semibold] text-2xl mb-[10vh] text-center opacity-80">
+          <Text className="text-gray-800 font-[semibold] text-2xl mb-[10vh] text-center opacity-80">
             {i18n.t("selectLng")}
           </Text>
           <View className=" px-[10vw]"></View>
@@ -82,7 +82,7 @@ const Language = ({ navigation }) => {
           onPress={() => navigation.navigate("home")}
           className="bg-slate-100 shadow-md my-[10vh] w-auto mx-auto rounded-full py-2"
         >
-          <Text className="text-center text-lg font-[medium] text-lime-500 px-[8vw]">
+          <Text className="text-center text-lg font-[medium] text-gray-800 px-[8vw]">
             {i18n.t("next")}
           </Text>
         </TouchableOpacity>

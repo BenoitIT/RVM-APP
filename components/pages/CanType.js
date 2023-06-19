@@ -30,9 +30,11 @@ const CanType = () => {
   const [selected, setSelected] = useState("");
   const [data, setData] = useState("");
   const [loader, setLoader] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   useEffect(() => {
     getAllowedBottles().then((result) => {
       setLoader(true);
+      setDisabled(true);
       const res = result.data.data;
       const bottleTypes = res.map((obj) => {
         const { id, bottleType, ...rest } = obj;
@@ -44,6 +46,7 @@ const CanType = () => {
       });
       setData(bottleTypes);
       setLoader(false);
+      setDisabled(false);
     });
   }, []);
   let [fontsLoaded] = useFonts({
@@ -73,7 +76,7 @@ const CanType = () => {
           <View className="border-b-3 shadow-md border-gray-800 mb-[10vh] py-[3vh]">
             <AppHeader />
           </View>
-          <Text className="text-gray-600 font-[semibold] text-xl mb-[5vh] text-center w-[90vw] mx-auto">
+          <Text className="text-gray-600 font-[semibold] text-xl mb-[5vh] text-center w-[80vw] mx-auto">
             {i18n.t("getReverse")}
           </Text>
           <View className=" px-[10vw]">
@@ -91,9 +94,10 @@ const CanType = () => {
           <View className="py-20">
             <CustomButton
               onPress={handleGoToNextPage}
+              disabled={disabled}
               title={i18n.t("next")}
               text="font-[extraBold] text-sm capitalize text-white text-center"
-              bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-8 w-[80vw] mx-auto"
+              bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-8 w-[80vw] mx-auto disabled:opacity-25"
             />
           </View>
         </View>
