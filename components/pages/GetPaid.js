@@ -110,6 +110,7 @@ const GetPaid = () => {
           <View className="py-8">
             <CustomButton
               title={i18n.t("transfer")}
+              disabled={false}
               text="font-bold text-sm capitalize text-white text-center"
               bgView="flex justify-center  bg-lime-600 focus:ring-1 shadow-md  shadow-sm border-gray-300 shadow-gray-950 dark:shadow-sm rounded-full py-2 mt-5 w-[80vw] mx-auto"
               onPress={handleCashTransfer}
